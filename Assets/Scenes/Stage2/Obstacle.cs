@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Obstacle : MonoBehaviour
 {
-
     public GameObject Mover;
     private bool isTip = false;
 
