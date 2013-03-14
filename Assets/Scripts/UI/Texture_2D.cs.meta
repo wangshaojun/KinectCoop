@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 7653a1b1b98122a4d8403c783f3858d3
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - guiSkin: {instanceID: 0}
+  - Texture2d: {instanceID: 0}
+  - TexturePicMaterial: {fileID: 2100000, guid: b3cf46808645cb94e90947db718c0fee,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
