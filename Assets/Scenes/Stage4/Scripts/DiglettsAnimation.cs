@@ -62,10 +62,6 @@ public class DiglettsAnimation : MonoBehaviour
         {
             this.renderer.material.mainTexture = this.ChangeTextures[0];
         }
-
-
-
-
     }
 
 
@@ -80,6 +76,6 @@ public class DiglettsAnimation : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         this.Reset();
-         this.isLive = false;
+        this.isLive = false;
     }
 }

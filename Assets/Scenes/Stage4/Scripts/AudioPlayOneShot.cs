@@ -29,7 +29,5 @@ public class AudioPlayOneShot : MonoBehaviour {
             this.gameObject.AddComponent<AudioSource>();
 
         this.audio.PlayOneShot(Audio);
-
-
     }
 }
