@@ -9,9 +9,10 @@ public class ObjectIn : MonoBehaviour {
 	void Start () {
         Stage3Difficulty = StageDifficulty.GetComponent<StageData>();
 	}
-    void RedBallCreat() { 
-      Instantiate(RedBall,new Vector3(this.transform.position.x + Random.Range(-10,10),this.transform.position.y + Random.Range(-3,3),this.transform.position.z),
-          RedBall.transform.rotation);
+    void RedBallCreat() {
+        Instantiate(RedBall, new Vector3(this.transform.position.x + Random.Range(-10, 10), this.transform.position.y + Random.Range(-3, 3), this.transform.position.z),
+                    RedBall.transform.rotation);
+        
     }
     void BlackBallCreat() {
         Instantiate(BlackBall, new Vector3(this.transform.position.x + Random.Range(-10, 10), this.transform.position.y + Random.Range(-3, 3), this.transform.position.z),
