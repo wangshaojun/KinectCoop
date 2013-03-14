@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// 第二關距離提示條的UI
+/// 第二關-距離提示條的UI
 /// </summary>
-public class DistanceHintUI : MonoBehaviour
+public class DistanceHintUI_Stage2 : MonoBehaviour
 {
     public Rect DistanceHintRect;           //距離提示條的Rectangle
 
