@@ -30,8 +30,8 @@ public class MoveController_Stage2 : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.A))
         {
             //this.transform.rigidbody.AddForce(new Vector3(0, 0, 10));
-            this.transform.Translate(new Vector3(0, 0, 1));
-            //this.transform.rigidbody.velocity += this.transform.TransformDirection(new Vector3(0, 0, 1));
+            //this.transform.Translate(new Vector3(0, 0, 1));
+            this.transform.rigidbody.velocity += this.transform.TransformDirection(new Vector3(0, 0, 3));
         }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// 第二關-拍掉火蠅的處理
+/// 第二關-玩家拍掉火蠅的處理
 /// </summary>
-public class DestroyEnemy_Stage2 : MonoBehaviour
+public class PlayerDestroyEnemy_Stage2 : MonoBehaviour
 {
+    public StageData stageData;
     public float DetectDistance = 1;    //偵測的距離
     public LayerMask EnemyLayer;        //敵人的Layer
     
@@ -27,10 +28,12 @@ public class DestroyEnemy_Stage2 : MonoBehaviour
                 if (Input.GetKeyUp(KeyCode.B))
                 {
                     Destroy(collider.gameObject);
+                    this.stageData.PositiveScore++;
                 }
                 //-----------------------------
             }
         }
+
     }
 
     void OnDrawGizmos()

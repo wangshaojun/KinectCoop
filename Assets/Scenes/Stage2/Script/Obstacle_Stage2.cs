@@ -11,6 +11,8 @@ public class Obstacle_Stage2 : MonoBehaviour
     private bool isTip = false;     //是否顯示提示UI
 
     public Rect TipRect;            //提示UI的Rect
+
+    public Color HintTextColor;
     
     public GUIStyle style;
 
@@ -51,8 +53,10 @@ public class Obstacle_Stage2 : MonoBehaviour
             //(未完成) 處理玩家進入提示後的反應
             if (Input.GetKeyUp(KeyCode.G))
             {
-                this.Player.transform.Translate(0, 4, 4);
+                this.Player.rigidbody.velocity = new Vector3(0, 6, 6);
+                //this.Player.transform.Translate(0, 4, 4);
             }
+            this.style.normal.textColor = this.HintTextColor;
         }
     }
 
