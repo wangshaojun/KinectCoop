@@ -12,6 +12,7 @@ public class CreateFireFly_Stage2 : MonoBehaviour
     public float CreateTimeMax = 3;     //最大生成時間
 
     public Transform[] CreatePoints;    //生成點(可設定多生成點)
+    public Transform[] TargetPoints;    //目標點(可設定多目標點)
 
     // Use this for initialization
     void Start()
@@ -32,15 +33,24 @@ public class CreateFireFly_Stage2 : MonoBehaviour
     /// </summary>
     void CreateEnemy()
     {
-        Instantiate(this.FireFly,
+        GameObject createObj = (GameObject)Instantiate(
+            this.FireFly,
             this.CreatePoints[Random.Range(0, this.CreatePoints.Length)].position,
             this.FireFly.transform.rotation);
+
+        createObj.GetComponent<EnemyTrackTarget_Stage2>().SetTargetPoints(this.TargetPoints);
     }
 
     void OnDrawGizmos()
     {
         //畫出偵測邊界
+        Gizmos.color = Color.blue;
         foreach (var obj in this.CreatePoints)
+            Gizmos.DrawWireSphere(obj.position, 1);
+
+        Gizmos.color = Color.red;
+
+        foreach (var obj in this.TargetPoints)
             Gizmos.DrawWireSphere(obj.position, 1);
     }
 }
