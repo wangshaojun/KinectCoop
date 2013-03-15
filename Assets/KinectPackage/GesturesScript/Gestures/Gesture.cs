@@ -22,6 +22,7 @@
     /// </summary>
     public class Gesture
     {
+        public static bool isSwipeLeft = false, isSwipeRight = false, isSwipeUp = false, isSwipeDown = false;
         /// <summary>
         /// The parts that make up this gesture
         /// </summary>
@@ -99,8 +100,15 @@
                     //動作結束
                     //範例
                     if(this.type == GestureType.LeftSwipe)
-                        Debug.Log("LeftSwipe");
-
+                    {
+                        isSwipeLeft = true;
+                        Debug.Log("揮左成功");
+                    }
+                    if (this.type == GestureType.RightSwipe)
+                    {
+                        isSwipeRight = true;
+                        Debug.Log("揮右");
+                    }
 
                     Debug.Log("動作結束");
                     this.Reset();
