@@ -58,7 +58,7 @@ public class FeetRayCast : MonoBehaviour
                 if (FootRight.y < velocity)
                 {
                     //如果有目標物
-                    if (Target)
+                    if (Target && Target.GetComponent<DiglettsReact>().isLive)
                     {
                         Target.SendMessage("isHit");
                         PositiveScoreProcess();

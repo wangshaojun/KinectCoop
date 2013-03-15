@@ -88,6 +88,7 @@ public class DiglettsReact : MonoBehaviour
     void isHit()
     {
         audio.PlayOneShot(digletts.Die);
+        this.Reset();
         this.isLive = false;
     }
 
