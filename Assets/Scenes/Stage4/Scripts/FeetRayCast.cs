@@ -8,8 +8,7 @@ public class FeetRayCast : MonoBehaviour
     public FeetMove feetMove;
     public Digletts digletts;
     public SkeletonWrapper skeletonWrapper;
-    private bool _kinectisEnable = true;
-    
+    public bool _kinectisEnable = true;
 
     public float velocity = -2;
     public float GestureCoolDown = 2; //擊中與未擊中的冷卻時間
@@ -17,12 +16,13 @@ public class FeetRayCast : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //腳有沒有在任何地鼠之上
         if (Physics.Raycast(transform.position, new Vector3(0, 0, 1), out hit, 10) == true)
         {
@@ -41,37 +41,57 @@ public class FeetRayCast : MonoBehaviour
             if (feetMove.FeetType == FeetMove.Feet.Left)
                 if (FootLeft.y < velocity)
                 {
+                    iTween.ColorTo(this.gameObject, iTween.Hash("r", 1.0, "g", 0, "b", 0, "time", 0.2));
+
                     //如果有目標物
-                    if (Target && Target.GetComponent<DiglettsReact>().isLive)
+                    if (Target)
                     {
-                        Target.SendMessage("isHit");
-                        PositiveScoreProcess();
+                        if (Target.GetComponent<DiglettsReact>().isLive)
+                        {
+                            Target.SendMessage("isHit");
+                            PositiveScoreProcess();
+                        }
+                        else
+                            NegativeScoreProcess();
+
                     }
                     else
                         NegativeScoreProcess();
 
                     _kinectisEnable = false;
+                    StartCoroutine(ResetColor(0.5F));
+                    StartCoroutine(CoolDown(GestureCoolDown));
                 }
+
             #endregion
             #region 右腳速度判定，下壓為負值
             if (feetMove.FeetType == FeetMove.Feet.Right)
                 if (FootRight.y < velocity)
                 {
-                    //如果有目標物
-                    if (Target && Target.GetComponent<DiglettsReact>().isLive)
+                    //如果有目標物///////////
+                    iTween.ColorTo(this.gameObject, iTween.Hash("r", 1.0, "g", 0, "b", 0, "time", 0.2));
+
+                    if (Target)
                     {
-                        Target.SendMessage("isHit");
-                        PositiveScoreProcess();
+                        if (Target.GetComponent<DiglettsReact>().isLive)
+                        {
+                            Target.SendMessage("isHit");
+                            PositiveScoreProcess();
+                        }
+                        else
+                            NegativeScoreProcess();
                     }
                     else
                         NegativeScoreProcess();
 
                     _kinectisEnable = false;
+                    StartCoroutine(ResetColor(0.5F));
+                    StartCoroutine(CoolDown(GestureCoolDown));
                 }
             #endregion
         }
-        else
-            StartCoroutine(CoolDown(GestureCoolDown, _kinectisEnable));
+
+
     }
 
 
@@ -96,19 +116,20 @@ public class FeetRayCast : MonoBehaviour
             digletts.stageData.NegativeScore += digletts.HardNegativeScore;
     }
 
-
-
-
-
     /// <summary>
     /// 強制冷卻時間 (針對Kinect的連續判斷)
     /// </summary>
-    /// <param name="delay"></param>
-    /// <returns></returns>
-    IEnumerator CoolDown(float delay,bool trigger)
+    IEnumerator CoolDown(float delay)
     {
         yield return new WaitForSeconds(delay);
-        trigger = true;
+        _kinectisEnable = true;
+         iTween.ColorTo(this.gameObject, iTween.Hash("r", 1, "g", 1, "b", 1, "time", 0.3));
+    }
+
+    IEnumerator ResetColor(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        iTween.ColorTo(this.gameObject, iTween.Hash("r", 1, "g", 1, "b", 1, "time", 0.3));
     }
 
 

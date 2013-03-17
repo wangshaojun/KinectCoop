@@ -67,12 +67,29 @@ public class StageData : MonoBehaviour {
         fTime = 0;
     }
 
-
+    /// <summary>
+    /// 改變關卡難度
+    /// </summary>
     public void ChangeStageType()
     {
         stageType = DataCollection.StageType.Hard;
         Init();
     }
 
+    
+    /// <summary>
+    /// 進入下一關卡
+    /// </summary>
+    /// <param name="stageName">關卡名稱：例如Stage1</param>
+    /// <param name="delayTime">等待時間</param>
+    public void NextStage(string stageName, float delayTime)
+    {
+        StartCoroutine(INextStage(stageName, delayTime));
+    }
 
+    IEnumerator INextStage(string stageName, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        Application.LoadLevel(stageName);
+    }
 }

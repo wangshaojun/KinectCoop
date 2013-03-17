@@ -5,6 +5,7 @@ public class StageTypeController : MonoBehaviour {
 
     public StageData stageData;
     public int HardCorrectTimesThreshold;
+    public int NextStageCorrectTimesThreshold;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,5 +18,9 @@ public class StageTypeController : MonoBehaviour {
             stageData.UploadData();
             stageData.ChangeStageType();
         }
+        if (stageData.stageType == DataCollection.StageType.Hard &&
+            stageData.CorrectTimes >= NextStageCorrectTimesThreshold)
+            stageData.NextStage("Stage1", 2.0F);
+
 	}
 }

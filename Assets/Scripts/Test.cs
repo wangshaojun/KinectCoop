@@ -9,6 +9,7 @@ public class Test : MonoBehaviour {
     public bool AddCorrectTimes;
     public bool Upload;
     public bool ChangeStageType;
+    public bool NextLevel;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +32,13 @@ public class Test : MonoBehaviour {
             stageData.ChangeStageType();
             ChangeStageType = false;
         }
+        if (NextLevel)
+        {
+            stageData.NextStage("Title", 2.0F);
+            NextLevel = false;
+        }
+
+        
 
 	}
 
