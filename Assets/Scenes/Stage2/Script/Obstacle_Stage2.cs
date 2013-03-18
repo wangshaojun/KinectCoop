@@ -12,52 +12,46 @@ public class Obstacle_Stage2 : MonoBehaviour
 
     public Rect TipRect;            //提示UI的Rect
 
+    public float MoveDistance;
+    public float MoveSpeed;
+
     public Color HintTextColor;
     
     public GUIStyle style;
 
-    /// <summary>
-    /// 當玩家進入障礙物範圍時...
-    /// </summary>
-    /// <param name="other">進入的物體</param>
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.Equals(this.Player))   //判斷是否為玩家控制的人物
-        {
-            this.isTip = true;
-        }
-    }
-
-    /// <summary>
-    /// 當玩家離開障礙物範圍時...
-    /// </summary>
-    /// <param name="other">離開的物體</param>
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.Equals(this.Player))   //判斷是否為玩家控制的人物
-        {
-            this.isTip = false;
-        }
-    }
-
+    private float addValue;
+    private Vector3 originPosition;
+    
     // Use this for initialization
     void Start()
     {
+        this.originPosition = this.transform.position;
+        this.addValue = Random.value * this.MoveDistance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (this.isTip)
+        if (Mathf.Abs(this.Player.transform.position.z - this.transform.position.z) < 5)
+            this.isTip = true;
+
+        else
+            this.isTip = false;
+
+        if (this.addValue > this.MoveDistance)
         {
-            //(未完成) 處理玩家進入提示後的反應
-            if (Input.GetKeyUp(KeyCode.G))
-            {
-                this.Player.rigidbody.velocity = new Vector3(0, 6, 6);
-                //this.Player.transform.Translate(0, 4, 4);
-            }
-            this.style.normal.textColor = this.HintTextColor;
+            this.addValue = this.MoveDistance;
+            this.MoveSpeed = -this.MoveSpeed;
         }
+        else if (this.addValue < 0)
+        {
+            this.addValue = 0;
+            this.MoveSpeed = -this.MoveSpeed;
+        }
+        this.addValue += this.MoveSpeed * Time.deltaTime;
+
+        this.style.normal.textColor = this.HintTextColor;
+        this.transform.position = new Vector3(this.originPosition.x, this.originPosition.y - this.addValue, this.originPosition.z);
     }
 
     void OnGUI()
