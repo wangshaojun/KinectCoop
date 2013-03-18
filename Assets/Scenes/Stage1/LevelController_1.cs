@@ -64,7 +64,7 @@ public class LevelController_1 : MonoBehaviour
         {
             //成功反應
             Instantiate(correctPlane);//出現幾秒後刪除，還沒寫
-
+            Destroy(GameObject.Find("CorrectPlane(Clone)"),3f);
             //呼叫置換水果的函式，還沒寫
             Debug.Log("bingo!");
             FruitCreator.isMoving = true;
