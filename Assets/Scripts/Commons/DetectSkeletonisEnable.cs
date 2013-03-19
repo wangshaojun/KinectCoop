@@ -30,9 +30,6 @@ public class DetectSkeletonisEnable : MonoBehaviour
                 Time.timeScale = 1;
         }
 
-
-        print(Time.deltaTime);
-
         if (SkeletonIsEnable)
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         else
