@@ -4,6 +4,7 @@ using System.Collections;
 public class ObjectIn : MonoBehaviour {
     public GameObject RedBall, BlackBall;
     public GameObject StageDifficulty;
+    public int RedCreat, BlackCreat;
     private StageData Stage3Difficulty;
 	// Use this for initialization
 	void Start () {
@@ -25,7 +26,7 @@ public class ObjectIn : MonoBehaviour {
 
             if (!IsInvoking("RedBallCreat"))
             {
-                Invoke("RedBallCreat", 3);
+                Invoke("RedBallCreat", RedCreat);
             }
         }
         if (Stage3Difficulty.stageType == DataCollection.StageType.Hard)
@@ -33,11 +34,11 @@ public class ObjectIn : MonoBehaviour {
 
             if (!IsInvoking("RedBallCreat"))
             {
-                Invoke("RedBallCreat", 3);
+                Invoke("RedBallCreat", RedCreat);
             }
             if (!IsInvoking("BlackBallCreat"))
             {
-                Invoke("BlackBallCreat", 2);
+                Invoke("BlackBallCreat", BlackCreat);
             }
         }
         

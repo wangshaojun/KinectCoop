@@ -46,9 +46,7 @@ public class ScoreCount : MonoBehaviour {
                   {                                                      //因為objs是GameObject型別所以obj也要是GameObject型別
                       obj.GetComponent<BallDestory>().SelfDestory();     //依序抓出的物件讓他執行他自己的功能
                   }
-             stageData.CorrectTimes = 0;
-             stageData.PositiveScore = 0;
-             stageData.TakeTime = 0;
+                stageData.Init();
              stageData.stageType = DataCollection.StageType.Hard;
             
         }
@@ -69,11 +67,8 @@ public class ScoreCount : MonoBehaviour {
             {                                                      //因為objs是GameObject型別所以obj也要是GameObject型別
                 obj.GetComponent<BallDestory>().SelfDestory();     //依序抓出的物件讓他執行他自己的功能
             }
-            stageData.CorrectTimes = 0;
-            stageData.PositiveScore = 0;
-            stageData.TakeTime = 0;
-            stageData.stageType = DataCollection.StageType.Normal;
-            Application.LoadLevel("Stage4");
+            stageData.Init();
+            stageData.NextStage("Stage3", 2);
         }
 	}
 }
