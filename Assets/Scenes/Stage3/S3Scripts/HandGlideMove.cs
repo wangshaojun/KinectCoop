@@ -12,7 +12,9 @@ public class HandGlideMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         this.transform.Translate(0, -1 * Time.deltaTime, 3 * Time.deltaTime);
-        this.transform.Rotate(0, HGMSkelForm.HandRightPos.y - HGMSkelForm.HandLeftPos.y, 0);
+		if(HGMSkelForm.HandRightPos.y > HGMSkelForm.ShoulderRightPos.y && 
+			HGMSkelForm.HandLeftPos.y > HGMSkelForm.ShoulderLeftPos.y)
+        this.transform.Rotate(0, -(HGMSkelForm.HandRightPos.y - HGMSkelForm.HandLeftPos.y), 0);
       /*  if (Input.GetKey("left") ) {
             this.transform.Rotate(0, -15 * Time.deltaTime,0);
         }

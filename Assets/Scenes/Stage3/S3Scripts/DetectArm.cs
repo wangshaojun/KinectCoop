@@ -16,12 +16,12 @@ public class DetectArm : MonoBehaviour {
         if (DASkelForm.HandLeftPos.y < DASkelForm.ShoulderLeftPos.y || DASkelForm.HandRightPos.y < DASkelForm.ShoulderRightPos.y)
         {
             Time.timeScale = 0.00000001f;
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+           // this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+           // this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
 	}
 }

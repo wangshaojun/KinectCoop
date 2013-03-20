@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HandGlideBodyRotate : MonoBehaviour {
     public GameObject HGBRGController;
+	public GameObject HandGlideBody;
     private SkeletonInformation HGBRSkelForm;
     public float HandGlideAngelZ, HGAZ_Parameter;
     // Use this for initialization
@@ -15,6 +16,8 @@ public class HandGlideBodyRotate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         HandGlideAngelZ = (HGBRSkelForm.HandRightPos.y - HGBRSkelForm.HandLeftPos.y) * HGAZ_Parameter;
-        this.gameObject.transform.Rotate(0, 0, HandGlideAngelZ);
+        if(HGBRSkelForm.HandRightPos.y > HGBRSkelForm.ShoulderRightPos.y && 
+			HGBRSkelForm.HandLeftPos.y > HGBRSkelForm.ShoulderLeftPos.y)
+		this.gameObject.transform.rotation = Quaternion.Euler(HandGlideBody.transform.eulerAngles.x, HandGlideBody.transform.eulerAngles.y, HandGlideAngelZ);
 	}
 }
