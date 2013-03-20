@@ -4,9 +4,9 @@ using System.Collections;
 public class FruitCreator : MonoBehaviour
 {
     public static int ikind = 0;
-    public static bool isMoving = false;
-    public static Transform f1, f2, f3, f4;
-    public Transform[] fruits = new Transform[4] { f1, f2, f3, f4 };
+    public static bool isMoving = false, isShowHint = true;
+    public static Transform f1, f2, f3, f4, f5, f6;
+    public Transform[] fruits = new Transform[6] { f1, f2, f3, f4, f5, f6 };
     public Transform dir1, dir2, dir3, dir4;
     Vector3 origin_pos = new Vector3(0, 0, 0);
 
@@ -23,25 +23,26 @@ public class FruitCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isMoving)  //水果往對應的方向移動、消失
+        if (isMoving)  //魔法球往對應的方向移動、消失
         {
-            Debug.Log(fruits[ikind].position);
             switch(ikind){
                 case 0: //left
                     //fruits[ikind].position += new Vector3(-10 * Time.deltaTime, 0, 0);
-                    fruits[ikind].transform.Translate(-10 * Time.deltaTime, 0, 0);
-                    if (fruits[ikind].position.x < -20)
+                    GameObject.Find("magic ball green(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                    //GameObject.Find("DirectionPlane_1(Clone)").   //這裡打算讓箭頭淡出(透明)
+                    if (GameObject.Find("magic ball green(Clone)").transform.position.x < -20)
                     {
                         DeleteFruit();
                         fruits[ikind].position = origin_pos; //還原位置
                         isMoving = false;
+
                         AddFruit(); //置換水果
                     }
                     break;
                 case 1: //up
                     //fruits[ikind].position += new Vector3(0, 10 * Time.deltaTime, 0);
-                    fruits[ikind].transform.Translate(0, 10 * Time.deltaTime, 0);
-                    if (fruits[ikind].position.y > 20)
+                    GameObject.Find("magic ball red(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                    if (GameObject.Find("magic ball red(Clone)").transform.position.y > 20)
                     {
                         DeleteFruit();
                         fruits[ikind].position = origin_pos; //還原位置
@@ -50,8 +51,9 @@ public class FruitCreator : MonoBehaviour
                     }
                     break;
                 case 2: //down
-                    fruits[ikind].position += new Vector3(0,-10 * Time.deltaTime, 0);
-                    if (fruits[ikind].position.y < -20)
+                    //fruits[ikind].position += new Vector3(0,-10 * Time.deltaTime, 0);
+                    GameObject.Find("magic ball yellow(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                    if (GameObject.Find("magic ball yellow(Clone)").transform.position.y < -20)
                     {
                         DeleteFruit();
                         fruits[ikind].position = origin_pos; //還原位置
@@ -60,8 +62,9 @@ public class FruitCreator : MonoBehaviour
                     }
                     break; 
                 case 3: //right
-                    fruits[ikind].position += new Vector3(10 * Time.deltaTime, 0, 0);
-                    if (fruits[ikind].position.x > 20)
+                    //fruits[ikind].position += new Vector3(10 * Time.deltaTime, 0, 0);
+                    GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                    if (GameObject.Find("magic ball blue(Clone)").transform.position.x > 20)
                    {
                       DeleteFruit();
                       fruits[ikind].position = origin_pos; //還原位置
@@ -76,33 +79,33 @@ public class FruitCreator : MonoBehaviour
 
     void AddFruit()
     {
-        ikind = Random.Range(0, 4);
-        ikind = 0;  //test
-        //Instantiate(fruits[ikind]);
-//        magicball = (GameObject)Instantiate(fruits[ikind]);
+        ikind = Random.Range(0, LevelController_1.kindNum);
+        //ikind = 0;  //test
         magicball = Instantiate(fruits[ikind]) as GameObject;
-
-        switch (ikind)
+        if (isShowHint)
         {
-            case 0: //left, green
-                dir = Instantiate(dir1) as GameObject;
-                print("green");
-                break;
-            case 1: //up, red
-                dir = Instantiate(dir2) as GameObject;
-                print("red");
-                break;
-            case 2: //down, yellow
-                dir = Instantiate(dir3) as GameObject;
-                print("yellow");
-                break;
-            case 3: //right, blue
-                dir = Instantiate(dir4) as GameObject;
-                print("blue");
-                break;
-            default:
-                print("other");
-                break;
+            switch (ikind)
+            {
+                case 0: //left, green
+                    dir = Instantiate(dir1) as GameObject;
+                    print("green");
+                    break;
+                case 1: //up, red
+                    dir = Instantiate(dir2) as GameObject;
+                    print("red");
+                    break;
+                case 2: //down, yellow
+                    dir = Instantiate(dir3) as GameObject;
+                    print("yellow");
+                    break;
+                case 3: //right, blue
+                    dir = Instantiate(dir4) as GameObject;
+                    print("blue");
+                    break;
+                default:
+                    print("other");
+                    break;
+            }
         }
 
     }
@@ -111,24 +114,31 @@ public class FruitCreator : MonoBehaviour
         switch (ikind)
         {
             case 0: //left
-                Destroy(GameObject.Find("Ball2_Prefab(Clone)"));
+                Destroy(GameObject.Find("magic ball green(Clone)"));
                 Destroy(GameObject.Find("DirectionPlane_1(Clone)"));
                 break;
             case 1: //up
-                Destroy(GameObject.Find("Ball1_Prefab(Clone)"));
+                Destroy(GameObject.Find("magic ball red(Clone)"));
                 Destroy(GameObject.Find("DirectionPlane_2(Clone)"));
                 break;
             case 2: //down
-                Destroy(GameObject.Find("Ball3_Prefab(Clone)"));
+                Destroy(GameObject.Find("magic ball yellow(Clone)"));
                 Destroy(GameObject.Find("DirectionPlane_3(Clone)"));
                 break;
             case 3: //right
-                Destroy(GameObject.Find("Ball4_Prefab(Clone)"));
+                Destroy(GameObject.Find("magic ball blue(Clone)"));
                 Destroy(GameObject.Find("DirectionPlane_4(Clone)"));
+                break;
+            case 4: //purple
+                Destroy(GameObject.Find("magic ball purple(Clone)"));
+                break;
+            case 5: //black
+                Destroy(GameObject.Find("magic ball black(Clone)"));
+                break;
+            default:
                 break;
         }
         Destroy(magicball);
         Destroy(dir);
-        Debug.Log("destory");
     }
 }
