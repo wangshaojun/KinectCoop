@@ -1,15 +1,27 @@
 using UnityEngine;
 using System.Collections;
 
-public class NextStage_Stage2 : MonoBehaviour {
+/// <summary>
+/// 處理玩家進入終點，進入Stage3
+/// </summary>
+public class NextStage_Stage2 : MonoBehaviour
+{
+    public StageData stageData_script;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void OnTriggerEnter()
+    {
+        this.stageData_script.NextStage("Stage3", 1.0f);
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
