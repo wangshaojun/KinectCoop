@@ -4,6 +4,7 @@ using System.Collections;
 public class HandGlideMove : MonoBehaviour {
     public GameObject HGMGController;
     private SkeletonInformation HGMSkelForm;
+    public float HandGlideRotateY;
 	// Use this for initialization
 	void Start () {
         HGMSkelForm = HGMGController.GetComponent<SkeletonInformation>();
@@ -14,7 +15,7 @@ public class HandGlideMove : MonoBehaviour {
         this.transform.Translate(0, -1 * Time.deltaTime, 3 * Time.deltaTime);
 		if(HGMSkelForm.HandRightPos.y > HGMSkelForm.ShoulderRightPos.y && 
 			HGMSkelForm.HandLeftPos.y > HGMSkelForm.ShoulderLeftPos.y)
-        this.transform.Rotate(0, -(HGMSkelForm.HandRightPos.y - HGMSkelForm.HandLeftPos.y), 0);
+            this.transform.Rotate(0, -(HGMSkelForm.HandRightPos.y - HGMSkelForm.HandLeftPos.y) * this.HandGlideRotateY, 0);
       /*  if (Input.GetKey("left") ) {
             this.transform.Rotate(0, -15 * Time.deltaTime,0);
         }
