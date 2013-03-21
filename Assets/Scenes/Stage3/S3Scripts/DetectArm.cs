@@ -32,5 +32,7 @@ public class DetectArm : MonoBehaviour
                 
             }
         }
+        else
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }
