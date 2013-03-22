@@ -4,7 +4,8 @@ using System.Collections;
 public class FruitCreator : MonoBehaviour
 {
     public static int ikind = 0;
-    public static bool isMoving = false, isShowHint = true;
+    public static bool isMoving = false, isShowHint = true, saveTempTime = false;
+    public static bool isOver3sec = false; //禬筁
     public static Transform f1, f2, f3, f4, f5, f6;
     public Transform[] fruits = new Transform[6] { f1, f2, f3, f4, f5, f6 };
     public Transform dir1, dir2, dir3, dir4;
@@ -33,10 +34,6 @@ public class FruitCreator : MonoBehaviour
                     if (GameObject.Find("magic ball green(Clone)").transform.position.x < -20)
                     {
                         DeleteFruit();
-                        fruits[ikind].position = origin_pos; //临竚
-                        isMoving = false;
-
-                        AddFruit(); //竚传狦
                     }
                     break;
                 case 1: //up
@@ -45,9 +42,6 @@ public class FruitCreator : MonoBehaviour
                     if (GameObject.Find("magic ball red(Clone)").transform.position.y > 20)
                     {
                         DeleteFruit();
-                        fruits[ikind].position = origin_pos; //临竚
-                        isMoving = false;
-                        AddFruit(); //竚传狦
                     }
                     break;
                 case 2: //down
@@ -56,9 +50,6 @@ public class FruitCreator : MonoBehaviour
                     if (GameObject.Find("magic ball yellow(Clone)").transform.position.y < -20)
                     {
                         DeleteFruit();
-                        fruits[ikind].position = origin_pos; //临竚
-                        isMoving = false;
-                        AddFruit(); //竚传狦
                     }
                     break; 
                 case 3: //right
@@ -67,18 +58,20 @@ public class FruitCreator : MonoBehaviour
                     if (GameObject.Find("magic ball blue(Clone)").transform.position.x > 20)
                    {
                       DeleteFruit();
-                      fruits[ikind].position = origin_pos; //临竚
-                      isMoving = false;
-                      AddFruit(); //竚传狦
                    }
                     break;
-
             }
+        }
+        if (isOver3sec)    //禬耞-->穝臸猭瞴
+        {
+            DeleteFruit();
+            isOver3sec = false;
         }
     }
 
     void AddFruit()
     {
+        saveTempTime = true;
         ikind = Random.Range(0, LevelController_1.kindNum);
         //ikind = 0;  //test
         magicball = Instantiate(fruits[ikind]) as GameObject;
@@ -140,5 +133,9 @@ public class FruitCreator : MonoBehaviour
         }
         Destroy(magicball);
         Destroy(dir);
+
+        fruits[ikind].position = origin_pos; //临竚
+        isMoving = false;
+        AddFruit(); //竚传狦
     }
 }

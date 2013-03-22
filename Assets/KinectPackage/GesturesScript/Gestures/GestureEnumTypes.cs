@@ -58,6 +58,8 @@
         /// <summary>
         /// swiped right
         /// </summary>
-        RightSwipe 
+        RightSwipe,
+        UpSwipe,
+        DownSwipe
     }
 //}

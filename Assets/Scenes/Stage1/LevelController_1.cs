@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LevelController_1 : MonoBehaviour
 {
-    public static bool isBingo = false;
+    public static bool isBingo = false, isFailed = false;   //是否達成正確判斷的任務
     public Transform correctPlane;
     public static int kindNum = 3;
     //此關卡揮手動作判斷為:往右需"左手往右揮"、往左需"右手往左揮"，其他動作尚未設定
@@ -16,6 +16,8 @@ public class LevelController_1 : MonoBehaviour
     public bool ChangeStageType;
     public bool NextLevel;
 
+    int tempTimer = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -25,71 +27,79 @@ public class LevelController_1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (FruitCreator.saveTempTime)
+        {
+            tempTimer = stageData.TakeTime;
+            FruitCreator.saveTempTime = false;
+        }
+
         if (stageData.stageType == DataCollection.StageType.Normal) {
             kindNum = 3;
             FruitCreator.isShowHint = true;
-            if (stageData.CorrectTimes >= 15) ChangeStageType = true;
+            //if (stageData.CorrectTimes >= 15) ChangeStageType = true;
+            if (stageData.CorrectTimes >= 5) ChangeStageType = true;   //debug mode
         }
         if (stageData.stageType == DataCollection.StageType.Hard) {
-            kindNum = 6; FruitCreator.isShowHint = false; 
+            kindNum = 6;
+            FruitCreator.isShowHint = false; 
             if (stageData.CorrectTimes >= 15) NextLevel = true;
-            else ;  //等三秒限制
+            else
+            {
+                if (tempTimer - stageData.TakeTime < -3) //等三秒限制，失敗的反應還沒寫
+                {
+                    FruitCreator.isOver3sec = true;
+                    AddWrongTimes = true;
+                }
+            }  
         }
             
         //判斷手揮動方向是否和顏色方位吻合
-        if (Gesture.isSwipeLeft)
-        {//left, red    
-            if (FruitCreator.ikind == 0) isBingo = true;
-            Gesture.isSwipeLeft = false;
-        }
-        if (Gesture.isSwipeRight)//right, orange
-        {
-            if (FruitCreator.ikind == 3) isBingo = true;
-            Gesture.isSwipeRight = false;
-        }
-        /* 下面的兩種動作偵測還沒寫好
-        if (Gesture.isSwipeUp)//up, yellow
-        {
-            if (FruitCreator.ikind == 1) isBingo = true;
-            Gesture.isSwipeLeft = false;
-        }
-        if (Gesture.isSwipeDown)//down, green
+        if (Input.GetKeyUp(KeyCode.S) || (Gesture.isSwipeDown))
         {
             if (FruitCreator.ikind == 2) isBingo = true;
-            Gesture.isSwipeRight = false;
-        }*/
-
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            if (FruitCreator.ikind == 2) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeDown = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A) || (Gesture.isSwipeLeft))
         {
             if (FruitCreator.ikind == 0) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeLeft = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.W) || (Gesture.isSwipeUp))
         {
             if (FruitCreator.ikind == 1) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeUp = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.D) || (Gesture.isSwipeRight))
         {
             if (FruitCreator.ikind == 3) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeRight = false;
         }
 
-        if (isBingo)
+        if (isBingo)    //成功分類
         {
             //紀錄成績
             AddCorrectTimes = true;
             //成功反應
-            Instantiate(correctPlane);//出現幾秒後刪除，還沒寫
+            Instantiate(correctPlane);
             Destroy(GameObject.Find("CorrectPlane(Clone)"),1.5f);
             //呼叫置換水果的函式，還沒寫
             Debug.Log("bingo!");
             FruitCreator.isMoving = true;
             isBingo = false;
+        }
+        if (isFailed)   //中途任務失敗重新進行關卡
+        {
+            AddWrongTimes = true;
+            //這裡要寫:重置關卡(還有進階版:連續失敗三次回到簡易版)
+            //先不寫
+            isFailed = false;
         }
 
         if (AddCorrectTimes)

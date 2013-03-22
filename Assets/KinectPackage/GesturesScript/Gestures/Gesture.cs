@@ -109,6 +109,16 @@
                         isSwipeRight = true;
                         Debug.Log("揮右");
                     }
+                    if (this.type == GestureType.UpSwipe)
+                    {
+                        isSwipeUp = true;
+                        Debug.Log("揮上");
+                    }
+                    if (this.type == GestureType.DownSwipe)
+                    {
+                        isSwipeDown = true;
+                        Debug.Log("揮下");
+                    }
 
                     Debug.Log("動作結束");
                     this.Reset();
