@@ -112,6 +112,7 @@
                     if (this.type == GestureType.UpSwipe)
                     {
                         isSwipeUp = true;
+                        //這裡加入避免揮上下連續判斷的緩衝-->不知如何加
                         Debug.Log("揮上");
                     }
                     if (this.type == GestureType.DownSwipe)

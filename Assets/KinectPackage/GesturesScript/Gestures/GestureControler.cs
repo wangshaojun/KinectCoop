@@ -128,13 +128,25 @@
             swipeleftSegments[1] = new SwipeLeftSegment2();
             swipeleftSegments[2] = new SwipeLeftSegment3();
             this.AddGesture(GestureType.LeftSwipe, swipeleftSegments);
-            /*
+
             IRelativeGestureSegment[] swiperightSegments = new IRelativeGestureSegment[3];
             swiperightSegments[0] = new SwipeRightSegment1();
             swiperightSegments[1] = new SwipeRightSegment2();
             swiperightSegments[2] = new SwipeRightSegment3();
-            this.gestures.AddGesture(GestureType.RightSwipe, swiperightSegments);
+            this.AddGesture(GestureType.RightSwipe, swiperightSegments);
 
+            IRelativeGestureSegment[] swipeupSegments = new IRelativeGestureSegment[3];
+            swipeupSegments[0] = new SwipeUpSegment1();
+            swipeupSegments[1] = new SwipeUpSegment2();
+            swipeupSegments[2] = new SwipeUpSegment3();
+            this.AddGesture(GestureType.UpSwipe, swipeupSegments);
+
+            IRelativeGestureSegment[] swipedownSegments = new IRelativeGestureSegment[3];
+            swipedownSegments[0] = new SwipeDownSegment1();
+            swipedownSegments[1] = new SwipeDownSegment2();
+            swipedownSegments[2] = new SwipeDownSegment3();
+            this.AddGesture(GestureType.DownSwipe, swipedownSegments);
+            /*
             IRelativeGestureSegment[] menuSegments = new IRelativeGestureSegment[20];
             MenuSegments1 menuSegment = new MenuSegments1();
             for (int i = 0; i < 20; i++)
