@@ -13,14 +13,18 @@ public class StageTypeController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (stageData.CorrectTimes == HardCorrectTimesThreshold)
+        if (stageData.stageType == DataCollection.StageType.Normal &&
+            stageData.CorrectTimes == HardCorrectTimesThreshold)
         {
             stageData.UploadData();
             stageData.ChangeStageType();
         }
         if (stageData.stageType == DataCollection.StageType.Hard &&
             stageData.CorrectTimes >= NextStageCorrectTimesThreshold)
-            stageData.NextStage("Stage1", 2.0F);
+        {
+            stageData.UploadData();
+            stageData.NextStage("Stage5", 2.0F);
+        }
 
 	}
 }

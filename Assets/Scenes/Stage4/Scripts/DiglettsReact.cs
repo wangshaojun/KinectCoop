@@ -18,6 +18,8 @@ public class DiglettsReact : MonoBehaviour
     private bool isChanging;
     public Digletts digletts;
 
+    public StageData stageData;
+
     public int diglettsNum;
     // Use this for initialization
     void Start()
@@ -81,6 +83,11 @@ public class DiglettsReact : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         this.Reset();
+        stageData.WrongTimes++;
+        if (stageData.stageType == DataCollection.StageType.Normal)
+            stageData.NegativeScore += digletts.NormalNegativeScore;
+        if (stageData.stageType == DataCollection.StageType.Hard)
+            stageData.NegativeScore += digletts.HardNegativeScore;
         this.isLive = false;
     }
 

@@ -52,11 +52,11 @@ public class FeetRayCast : MonoBehaviour
                             PositiveScoreProcess();
                         }
                         else
-                            NegativeScoreProcess();
+                            ; //NegativeScoreProcess();
 
                     }
                     else
-                        NegativeScoreProcess();
+                        ;//NegativeScoreProcess();
 
                     _kinectisEnable = false;
                     StartCoroutine(ResetColor(0.5F));
@@ -79,10 +79,10 @@ public class FeetRayCast : MonoBehaviour
                             PositiveScoreProcess();
                         }
                         else
-                            NegativeScoreProcess();
+                            ;//NegativeScoreProcess();
                     }
                     else
-                        NegativeScoreProcess();
+                        ;//NegativeScoreProcess();
 
                     _kinectisEnable = false;
                     StartCoroutine(ResetColor(0.5F));
