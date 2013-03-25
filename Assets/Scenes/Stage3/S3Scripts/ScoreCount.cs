@@ -68,7 +68,7 @@ public class ScoreCount : MonoBehaviour {
                 obj.GetComponent<BallDestory>().SelfDestory();     //依序抓出的物件讓他執行他自己的功能
             }
             stageData.Init();
-            stageData.NextStage("Stage3", 2);
+            stageData.NextStage("Stage4", 2);
         }
 	}
 }
