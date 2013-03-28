@@ -13,6 +13,12 @@ public class FruitCreator : MonoBehaviour
 
     public GameObject magicball, dir;
 
+    void OnTriggerEnter(Collider col)
+    {
+        Debug.Log("hit");
+        if (col.tag == "Stage1Ball") DeleteFruit();
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -24,6 +30,8 @@ public class FruitCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        //OnTriggerEnter(GameObject.Find("CollisionCube_l").collider);
         if (isMoving)  //魔法球往對應的方向移動、消失
         {
             switch(ikind){
@@ -31,10 +39,11 @@ public class FruitCreator : MonoBehaviour
                     //fruits[ikind].position += new Vector3(-10 * Time.deltaTime, 0, 0);
                     GameObject.Find("magic ball green(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
                     //GameObject.Find("DirectionPlane_1(Clone)").   //這裡打算讓箭頭淡出(透明)
-                    if (GameObject.Find("magic ball green(Clone)").transform.position.x < -20)
+                    /*if (GameObject.Find("magic ball green(Clone)").transform.position.x < -20)
                     {
                         DeleteFruit();
-                    }
+                    }*/
+                    //OnTriggerEnter(GameObject.Find("CollisionCube_l").collider);
                     break;
                 case 1: //up
                     //fruits[ikind].position += new Vector3(0, 10 * Time.deltaTime, 0);
