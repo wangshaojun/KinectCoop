@@ -4,82 +4,62 @@ using System.Collections;
 public class FruitCreator : MonoBehaviour
 {
     public static int ikind = 0;
-    public static bool isMoving = false, isShowHint = true, saveTempTime = false;
+    public static bool isMoving = false, isShowHint = true, saveTempTime = false, isBallKilled = false;
     public static bool isOver3sec = false; //三秒限制超過
     public static Transform f1, f2, f3, f4, f5, f6;
     public Transform[] fruits = new Transform[6] { f1, f2, f3, f4, f5, f6 };
     public Transform dir1, dir2, dir3, dir4;
-    Vector3 origin_pos = new Vector3(0, 0, 0);
+    Vector3 origin_pos = new Vector3(0, 0, 30);
 
     public GameObject magicball, dir;
-
-    void OnTriggerEnter(Collider col)
-    {
-        Debug.Log("hit");
-        if (col.tag == "Stage1Ball") DeleteFruit();
-    }
 
     // Use this for initialization
     void Start()
     {
         AddFruit();
         origin_pos = fruits[ikind].position;
-        //call fruitElement update function
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        //OnTriggerEnter(GameObject.Find("CollisionCube_l").collider);
-        if (isMoving)  //魔法球往對應的方向移動、消失
-        {
-            switch(ikind){
-                case 0: //left
-                    //fruits[ikind].position += new Vector3(-10 * Time.deltaTime, 0, 0);
-                    GameObject.Find("magic ball green(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
-                    //GameObject.Find("DirectionPlane_1(Clone)").   //這裡打算讓箭頭淡出(透明)
-                    /*if (GameObject.Find("magic ball green(Clone)").transform.position.x < -20)
-                    {
-                        DeleteFruit();
-                    }*/
-                    //OnTriggerEnter(GameObject.Find("CollisionCube_l").collider);
-                    break;
-                case 1: //up
-                    //fruits[ikind].position += new Vector3(0, 10 * Time.deltaTime, 0);
-                    GameObject.Find("magic ball red(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
-                    if (GameObject.Find("magic ball red(Clone)").transform.position.y > 20)
-                    {
-                        DeleteFruit();
-                    }
-                    break;
-                case 2: //down
-                    //fruits[ikind].position += new Vector3(0,-10 * Time.deltaTime, 0);
-                    GameObject.Find("magic ball yellow(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
-                    if (GameObject.Find("magic ball yellow(Clone)").transform.position.y < -20)
-                    {
-                        DeleteFruit();
-                    }
-                    break; 
-                case 3: //right
-                    //fruits[ikind].position += new Vector3(10 * Time.deltaTime, 0, 0);
-                    GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
-                    if (GameObject.Find("magic ball blue(Clone)").transform.position.x > 20)
-                   {
-                      DeleteFruit();
-                   }
-                    break;
-            }
-        }
+        if (isMoving) MoveFruit();  //魔法球往對應的方向移動
+
         if (isOver3sec)    //超時判斷-->更新魔法球
         {
             DeleteFruit();
             isOver3sec = false;
         }
+
+        if (isBallKilled)   //從碰撞區(CubeTrigger)判斷是否移除魔法球
+        { 
+            DeleteFruit(); 
+            isBallKilled = false; 
+        }
+    }
+
+    void MoveFruit()    //還要增加黑色藍色的移動
+    {
+        switch (ikind)
+        {
+            case 0: //left
+                GameObject.Find("magic ball green(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                break;
+            case 1: //up
+                GameObject.Find("magic ball red(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                break;
+            case 2: //down
+                GameObject.Find("magic ball yellow(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                break;
+            case 3: //right
+                GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                break;
+        }
     }
 
     void AddFruit()
     {
+        fruits[ikind].position = origin_pos; //還原位置
         saveTempTime = true;
         ikind = Random.Range(0, LevelController_1.kindNum);
         //ikind = 0;  //test
@@ -140,10 +120,6 @@ public class FruitCreator : MonoBehaviour
             default:
                 break;
         }
-        Destroy(magicball);
-        Destroy(dir);
-
-        fruits[ikind].position = origin_pos; //還原位置
         isMoving = false;
         AddFruit(); //置換水果
     }

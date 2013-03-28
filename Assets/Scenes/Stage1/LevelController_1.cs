@@ -52,35 +52,8 @@ public class LevelController_1 : MonoBehaviour
                 }
             }  
         }
-            
-        //判斷手揮動方向是否和顏色方位吻合
-        if (Input.GetKeyUp(KeyCode.S) || (Gesture.isSwipeDown))
-        {
-            if (FruitCreator.ikind == 2) isBingo = true;
-            else isFailed = true;
-            Gesture.isSwipeDown = false;
-        }
 
-        if (Input.GetKeyUp(KeyCode.A) || (Gesture.isSwipeLeft))
-        {
-            if (FruitCreator.ikind == 0) isBingo = true;
-            else isFailed = true;
-            Gesture.isSwipeLeft = false;
-        }
-
-        if (Input.GetKeyUp(KeyCode.W) || (Gesture.isSwipeUp))
-        {
-            if (FruitCreator.ikind == 1) isBingo = true;
-            else isFailed = true;
-            Gesture.isSwipeUp = false;
-        }
-
-        if (Input.GetKeyUp(KeyCode.D) || (Gesture.isSwipeRight))
-        {
-            if (FruitCreator.ikind == 3) isBingo = true;
-            else isFailed = true;
-            Gesture.isSwipeRight = false;
-        }
+        Act();
 
         if (isBingo)    //成功分類
         {
@@ -130,5 +103,36 @@ public class LevelController_1 : MonoBehaviour
             NextLevel = false;
         }
 
+    }
+
+    void Act() {
+        //判斷手揮動方向是否和顏色方位吻合
+        if (Input.GetKeyUp(KeyCode.S) || (Gesture.isSwipeDown))
+        {
+            if (FruitCreator.ikind == 2) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeDown = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.A) || (Gesture.isSwipeLeft))
+        {
+            if (FruitCreator.ikind == 0) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeLeft = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) || (Gesture.isSwipeUp))
+        {
+            if (FruitCreator.ikind == 1) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeUp = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.D) || (Gesture.isSwipeRight))
+        {
+            if (FruitCreator.ikind == 3) isBingo = true;
+            else isFailed = true;
+            Gesture.isSwipeRight = false;
+        }
     }
 }
