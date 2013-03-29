@@ -33,13 +33,13 @@ public class MoveController_Stage2 : MonoBehaviour
         //print(this.rigidbody.velocity);
         if (this.SkeletonIsEnableScript.SkeletonIsEnable)
         {
-            //確認手是否平舉
-            if (Mathf.Abs(this.skeletonInfo_script.HandLeftPos.y - this.skeletonInfo_script.ShoulderLeftPos.y) < 0.1f &&
-                Mathf.Abs(this.skeletonInfo_script.HandRightPos.y - this.skeletonInfo_script.ShoulderRightPos.y) < 0.1f)
-            {
-                //(未完成) Kinect偵測玩家的處理
-                //-----------------------------
-            }
+            ////確認手是否平舉
+            //if (Mathf.Abs(this.skeletonInfo_script.HandLeftPos.y - this.skeletonInfo_script.ShoulderLeftPos.y) < 0.1f &&
+            //    Mathf.Abs(this.skeletonInfo_script.HandRightPos.y - this.skeletonInfo_script.ShoulderRightPos.y) < 0.1f)
+            //{
+            //    //(未完成) Kinect偵測玩家的處理
+            //    //-----------------------------
+            //}
             if (this.skeletonInfo_script.HipCenterPos.y > 1)
             {
                 if (this.FeetState != FeetRaiseState.Left)
