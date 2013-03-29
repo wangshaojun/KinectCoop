@@ -83,6 +83,8 @@ public class DiglettsReact : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         this.Reset();
+
+
         stageData.WrongTimes++;
         if (stageData.stageType == DataCollection.StageType.Normal)
             stageData.NegativeScore += digletts.NormalNegativeScore;
@@ -97,6 +99,8 @@ public class DiglettsReact : MonoBehaviour
         audio.PlayOneShot(digletts.Die);
         this.Reset();
         this.isLive = false;
+
+        StopCoroutine("Stay");
     }
 
 }

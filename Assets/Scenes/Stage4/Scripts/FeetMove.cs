@@ -20,8 +20,8 @@ public class FeetMove : MonoBehaviour {
     {
         //  this.transform.position = this.OrginalPosition;
         if (FeetType == Feet.Left)
-            this.transform.localPosition = this.OrginalLocalPosition + new Vector3(skeletonInformation.FootLeftPos.x, skeletonInformation.FootLeftPos.z, this.transform.localPosition.z) * ratio;
+            this.transform.localPosition = this.OrginalLocalPosition + new Vector3(skeletonInformation.FootLeftPos.x, skeletonInformation.FootLeftPos.z - (skeletonInformation.FootLeftPos.y -0.2F), this.transform.localPosition.z) * ratio;
         if (FeetType == Feet.Right)
-            this.transform.localPosition = this.OrginalLocalPosition + new Vector3(skeletonInformation.FootRightPos.x, skeletonInformation.FootRightPos.z, this.transform.localPosition.z) * ratio;
+            this.transform.localPosition = this.OrginalLocalPosition + new Vector3(skeletonInformation.FootRightPos.x, skeletonInformation.FootRightPos.z - (skeletonInformation.FootLeftPos.y - 0.2F), this.transform.localPosition.z) * ratio;
     }
 }
