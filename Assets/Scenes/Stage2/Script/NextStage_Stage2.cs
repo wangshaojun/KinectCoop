@@ -8,9 +8,10 @@ public class NextStage_Stage2 : MonoBehaviour
 {
     public StageData stageData_script;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        this.stageData_script.NextStage("Stage3", 1.0f);
+        if(other.tag == "Player")
+            this.stageData_script.NextStage("Stage3", 1.0f);
     }
 
     // Use this for initialization
