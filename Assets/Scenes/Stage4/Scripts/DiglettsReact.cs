@@ -84,13 +84,15 @@ public class DiglettsReact : MonoBehaviour
         yield return new WaitForSeconds(delay);
         this.Reset();
 
-
-        stageData.WrongTimes++;
-        if (stageData.stageType == DataCollection.StageType.Normal)
-            stageData.NegativeScore += digletts.NormalNegativeScore;
-        if (stageData.stageType == DataCollection.StageType.Hard)
-            stageData.NegativeScore += digletts.HardNegativeScore;
-        this.isLive = false;
+        if (this.isLive)
+        {
+            stageData.WrongTimes++;
+            if (stageData.stageType == DataCollection.StageType.Normal)
+                stageData.NegativeScore += digletts.NormalNegativeScore;
+            if (stageData.stageType == DataCollection.StageType.Hard)
+                stageData.NegativeScore += digletts.HardNegativeScore;
+            this.isLive = false;
+        }
     }
 
 
@@ -100,7 +102,7 @@ public class DiglettsReact : MonoBehaviour
         this.Reset();
         this.isLive = false;
 
-        StopCoroutine("Stay");
+        //StopCoroutine("Stay");
     }
 
 }
