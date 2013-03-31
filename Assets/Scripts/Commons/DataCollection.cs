@@ -24,6 +24,10 @@ public class DataCollection : MonoBehaviour
         public int NegativeScore;   //扣分分數
         public int TakeTime;        //花費時間
 
+        //For Stage2
+        public int CorrectTimes2;    //正確次數
+        public int WrongTimes2;      //錯誤次數
+
         /// <summary>
         /// 關卡資料
         /// </summary>
@@ -41,7 +45,9 @@ public class DataCollection : MonoBehaviour
             int WrongTimes = 0,
             int PositiveScore = 0,
             int NegativeScore = 0,
-            int TakeTime = 0
+            int TakeTime = 0,
+            int CorrectTimes2 = 0,
+            int WrongTimes2 = 0
         )
         {
             this.stageType = stageType;
@@ -51,10 +57,14 @@ public class DataCollection : MonoBehaviour
             this.PositiveScore = PositiveScore;
             this.NegativeScore = NegativeScore;
             this.TakeTime = TakeTime;
+            this.CorrectTimes2 = CorrectTimes2;
+            this.WrongTimes2 = WrongTimes2;
         }   
          
     }
     public ArrayList StageDataList;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -102,34 +112,65 @@ public class DataCollection : MonoBehaviour
             PlayerTotalScore = 0;
             for (int i = 0; i < StageDataList.Count; i++)
                 PlayerTotalScore += ((StageData)StageDataList[i]).PositiveScore - ((StageData)StageDataList[i]).NegativeScore;
-            
+
 
             sw.Write("玩家總分：" + PlayerTotalScore + "\r\n");
         }
+        #region
         // 輸出關卡資訊
         {
             for (int i = 0; i < StageDataList.Count; i++)
             {
-                sw.Write("---------------------------------------" + "\r\n");
-                string StatgeData = string.Format("關卡類別：{0} " + "\r\n" +
-                                                  "關卡名稱：{1} " + "\r\n" +
-                                                  "正確次數：{2} " + "\r\n" +
-                                                  "錯誤次數：{3} " + "\r\n" +
-                                                  "得分分數：{4} " + "\r\n" +
-                                                  "扣分分數：{5} " + "\r\n" +
-                                                  "花費時間：{6} " + "\r\n",
-                                                ((StageData)StageDataList[i]).stageType.ToString(),
-                                                ((StageData)StageDataList[i]).stageName.ToString(),
-                                                ((StageData)StageDataList[i]).CorrectTimes.ToString(),
-                                                ((StageData)StageDataList[i]).WrongTimes.ToString(),
-                                                ((StageData)StageDataList[i]).PositiveScore.ToString(),
-                                                ((StageData)StageDataList[i]).NegativeScore.ToString(),
-                                                ((StageData)StageDataList[i]).TakeTime.ToString()
-                    );
-                sw.Write(StatgeData);
-            }
-        }
+                if (((StageData)StageDataList[i]).stageName.ToString() != "平衡木")
+                {
+                    sw.Write("---------------------------------------" + "\r\n");
+                    string StatgeData = string.Format("關卡類別：{0} " + "\r\n" +
+                                                      "關卡名稱：{1} " + "\r\n" +
+                                                      "正確次數：{2} " + "\r\n" +
+                                                      "錯誤次數：{3} " + "\r\n" +
+                                                      "得分分數：{4} " + "\r\n" +
+                                                      "扣分分數：{5} " + "\r\n" +
+                                                      "花費時間：{6} " + "\r\n",
+                                                    ((StageData)StageDataList[i]).stageType.ToString(),
+                                                    ((StageData)StageDataList[i]).stageName.ToString(),
+                                                    ((StageData)StageDataList[i]).CorrectTimes.ToString(),
+                                                    ((StageData)StageDataList[i]).WrongTimes.ToString(),
+                                                    ((StageData)StageDataList[i]).PositiveScore.ToString(),
+                                                    ((StageData)StageDataList[i]).NegativeScore.ToString(),
+                                                    ((StageData)StageDataList[i]).TakeTime.ToString()
+                        );
+                    sw.Write(StatgeData);
+                }
+                else
+                {
 
+                    sw.Write("---------------------------------------" + "\r\n");
+                    string StatgeData = string.Format("關卡類別：{0} " + "\r\n" +
+                                                      "關卡名稱：{1} " + "\r\n" +
+                                                      "正確次數(障礙物)：{2} " + "\r\n" +
+                                                      "錯誤次數(障礙物)：{3} " + "\r\n" +
+                                                      "正確次數(火蠅)：{4} " + "\r\n" +
+                                                      "錯誤次數(火蠅)：{5} " + "\r\n" +
+                                                      "得分分數：{6} " + "\r\n" +
+                                                      "扣分分數：{7} " + "\r\n" +
+                                                      "花費時間：{8} " + "\r\n",
+                                                    ((StageData)StageDataList[i]).stageType.ToString(),
+                                                    ((StageData)StageDataList[i]).stageName.ToString(),
+                                                    ((StageData)StageDataList[i]).CorrectTimes.ToString(),
+                                                    ((StageData)StageDataList[i]).WrongTimes.ToString(),
+                                                    ((StageData)StageDataList[i]).CorrectTimes2.ToString(),
+                                                    ((StageData)StageDataList[i]).WrongTimes2.ToString(),
+                                                    ((StageData)StageDataList[i]).PositiveScore.ToString(),
+                                                    ((StageData)StageDataList[i]).NegativeScore.ToString(),
+                                                    ((StageData)StageDataList[i]).TakeTime.ToString()
+                        );
+                    sw.Write(StatgeData);
+
+                }
+            }
+            
+        }
+#endregion
 
         sw.Close();
     }
