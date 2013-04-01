@@ -33,12 +33,13 @@ public class CreateFireFly_Stage2 : MonoBehaviour
     /// </summary>
     void CreateEnemy()
     {
+        int random = Random.Range(0, this.CreatePoints.Length);
         GameObject createObj = (GameObject)Instantiate(
             this.FireFly,
-            this.CreatePoints[Random.Range(0, this.CreatePoints.Length)].position,
+            this.CreatePoints[random].position,
             this.FireFly.transform.rotation);
 
-        createObj.GetComponent<EnemyTrackTarget_Stage2>().SetTargetPoints(this.TargetPoints);
+        createObj.GetComponent<EnemyTrackTarget_Stage2>().SetTargetPoints(this.TargetPoints[random]);
     }
 
     void OnDrawGizmos()
