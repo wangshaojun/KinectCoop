@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerDestroyEnemy_Stage2 : MonoBehaviour
 {
-    public StageData StageData_Script;
+    public Stage2Data StageData_Script;
     public LayerMask EnemyLayer;        //¼Ä¤HªºLayer
 
     void OnTriggerEnter(Collider other)
