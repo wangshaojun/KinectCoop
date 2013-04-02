@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerDestroyEnemy_Stage2 : MonoBehaviour
 {
-    public Stage2Data StageData_Script;
+    public CalculateScore_Stage2 CalculateScore_Script;
     public LayerMask EnemyLayer;        //¼Ä¤HªºLayer
 
     void OnTriggerEnter(Collider other)
@@ -15,13 +15,15 @@ public class PlayerDestroyEnemy_Stage2 : MonoBehaviour
         if (((1 << other.gameObject.layer) & this.EnemyLayer.value) > 0)
         {
             Destroy(other.gameObject);
-            this.StageData_Script.PositiveScore++;
+            this.CalculateScore_Script.KillFireflyCount++;
         }
     }
 
     // Use this for initialization
     void Start()
     {
+        if (this.CalculateScore_Script == null)
+            this.CalculateScore_Script = GameObject.Find("CalculateScore").GetComponent<CalculateScore_Stage2>();
     }
 
     // Update is called once per frame
