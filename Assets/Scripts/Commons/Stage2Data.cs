@@ -50,8 +50,8 @@ public class Stage2Data : MonoBehaviour {
     public void SetPlayerPrefs()
     {
         PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "CorrectTimes1", CorrectTimes1);
-        PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "WrongTimes1", WrongTimes2);
-        PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "CorrectTimes2", CorrectTimes1);
+        PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "WrongTimes1", WrongTimes1);
+        PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "CorrectTimes2", CorrectTimes2);
         PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "WrongTimes2", WrongTimes2);
         PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "PositiveScore", PositiveScore);
         PlayerPrefs.SetInt(stageName.ToString() + stageType.ToString() + "NegativeScore", NegativeScore);
