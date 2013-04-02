@@ -47,6 +47,7 @@ public class MoveController_Stage2 : MonoBehaviour
                     //確認腳的動作
                     if (this.skeletonInfo_script.HipLeftPos.y - this.skeletonInfo_script.KneeLeftPos.y < this.Knne_Hip_Delta)
                     {
+                        print("Left");
                         this.FeetState = FeetRaiseState.Left;
                         this.transform.rigidbody.velocity += this.transform.TransformDirection(new Vector3(0, 0, this.AddSpeed));
                     }
@@ -56,6 +57,7 @@ public class MoveController_Stage2 : MonoBehaviour
                     //確認腳的動作
                     if (this.skeletonInfo_script.HipRightPos.y - this.skeletonInfo_script.KneeRightPos.y < this.Knne_Hip_Delta)
                     {
+                        print("Right");
                         this.FeetState = FeetRaiseState.Right;
                         this.transform.rigidbody.velocity += this.transform.TransformDirection(new Vector3(0, 0, this.AddSpeed));
                     }
