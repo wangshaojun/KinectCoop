@@ -6,12 +6,12 @@ using System.IO;
 public class DataCollection : MonoBehaviour
 {
     // * DataCollection 資訊整合檔
-
+    
     public string PlayerName;           //玩家名稱
     public int PlayerTotalScore;        //玩家總分
     public string StartTime;            //系統開始時間
 
-    public enum StageType { Undefined, Normal, Hard }; //關卡難度類別
+    public enum StageType { Undefined, Normal, Hard, Boss }; //關卡難度類別
     public enum StageName { 未定義, 魔法球分類, 平衡木, 滑翔翼, 閃避地雷, 最終大魔王 }; //關卡名稱
 
     public struct StageData
