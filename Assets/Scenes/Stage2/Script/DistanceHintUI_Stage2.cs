@@ -14,8 +14,6 @@ public class DistanceHintUI_Stage2 : MonoBehaviour
     public Texture DistanceHintBoxTexture;  //提示距離條的貼圖
     public Texture ArrowTexture;            //箭頭的貼圖
 
-    public float ArrowStartPosX;            //提示箭頭開始的位置
-    public float ArrowWidth = 25;           //提示箭頭的大小
     public GUIStyle style;
 
     private Vector2 screenSize;             //視窗大小
@@ -27,26 +25,21 @@ public class DistanceHintUI_Stage2 : MonoBehaviour
     {
         //計算總長度
         this.totalDistance = Vector3.Distance(this.MoverObject.transform.position, this.EndPositionObject.transform.position);
-
-        this.arrowCurrentPosX = this.ArrowStartPosX;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.screenSize = new Vector2(Screen.width, Screen.height);     //抓當前螢幕大小
-
-        float distanceHintBoxTextureWidth;
-        distanceHintBoxTextureWidth = this.DistanceHintRect.width * this.screenSize.x;
-        this.arrowCurrentPosX = Mathf.Lerp(this.ArrowStartPosX - (this.ArrowWidth / 2), this.ArrowStartPosX + distanceHintBoxTextureWidth - this.ArrowWidth, 1 - Vector3.Distance(this.MoverObject.transform.position, this.EndPositionObject.transform.position) / this.totalDistance);
+        this.screenSize = new Vector2((float)Screen.width / 1280.0f, (float)Screen.height / 720.0f);     //抓當前螢幕大小
+        this.arrowCurrentPosX = (this.DistanceHintBoxTexture.width * this.DistanceHintRect.width * this.screenSize.x) * Mathf.Lerp(1, 0, Vector3.Distance(this.MoverObject.transform.position, this.EndPositionObject.transform.position) / this.totalDistance);
     }
 
     void OnGUI()
     {
-        GUI.Box(new Rect(this.arrowCurrentPosX, this.DistanceHintRect.y * this.screenSize.y - this.ArrowWidth, this.ArrowWidth, this.ArrowWidth), this.ArrowTexture, this.style);
-
-        GUI.Box(new Rect(this.DistanceHintRect.x * this.screenSize.x, this.DistanceHintRect.y * this.screenSize.y, this.DistanceHintRect.width * this.screenSize.x, this.DistanceHintRect.height * this.screenSize.y),
+        GUI.Box(new Rect(this.DistanceHintRect.x * this.screenSize.x, this.DistanceHintRect.y * this.screenSize.y, this.DistanceHintBoxTexture.width * this.DistanceHintRect.width * this.screenSize.x, this.DistanceHintBoxTexture.height * this.DistanceHintRect.height * this.screenSize.y),
                         this.DistanceHintBoxTexture,
                         this.style);
+
+        GUI.Box(new Rect((this.DistanceHintRect.x - this.ArrowTexture.width / 2) * this.screenSize.x + this.arrowCurrentPosX, (this.DistanceHintRect.y - this.ArrowTexture.height) * this.screenSize.y, this.ArrowTexture.width * this.screenSize.x, this.ArrowTexture.height * this.screenSize.y), this.ArrowTexture, this.style);
     }
 }

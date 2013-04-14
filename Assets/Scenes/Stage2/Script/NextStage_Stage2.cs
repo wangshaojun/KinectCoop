@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class NextStage_Stage2 : MonoBehaviour
 {
-    public StageData stageData_script;
+    public Stage2Data stageData_script;
 
     void OnTriggerEnter(Collider other)
     {

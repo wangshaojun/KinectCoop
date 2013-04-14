@@ -14,6 +14,7 @@ public class PlayerDestroyEnemy_Stage2 : MonoBehaviour
         if (((1 << other.gameObject.layer) & this.EnemyLayer.value) > 0)
         {
             Destroy(other.gameObject);
+            this.audio.Play();      //電擊蟲被擊中音效
             CalculateScore_Stage2.KillFireflyCount++;
         }
     }
