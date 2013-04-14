@@ -18,8 +18,8 @@ public class HandGlideBodyRotate : MonoBehaviour
     void Update()
     {
         HandGlideAngelZ = -(HGBRSkelForm.HandRightPos.y - HGBRSkelForm.HandLeftPos.y) * HGAZ_Parameter;
-        if (HGBRSkelForm.HandRightPos.y > HGBRSkelForm.ShoulderRightPos.y &&
-            HGBRSkelForm.HandLeftPos.y > HGBRSkelForm.ShoulderLeftPos.y)
+        if (HGBRSkelForm.HandRightPos.y > HGBRSkelForm.ElbowRightPos.y &&
+            HGBRSkelForm.HandLeftPos.y > HGBRSkelForm.ElbowLeftPos.y)
             this.gameObject.transform.rotation = Quaternion.Euler(HandGlideBody.transform.eulerAngles.x + 330, HandGlideBody.transform.eulerAngles.y + 180, HandGlideAngelZ);
     }
 }

@@ -16,15 +16,15 @@ public class HandGlideMove : MonoBehaviour
     void Update()
     {
         this.transform.Translate(0, -1 * Time.deltaTime, 3 * Time.deltaTime);
-        if (HGMSkelForm.HandRightPos.y > HGMSkelForm.ShoulderRightPos.y &&
-            HGMSkelForm.HandLeftPos.y > HGMSkelForm.ShoulderLeftPos.y)
+        if (HGMSkelForm.HandRightPos.y > HGMSkelForm.ElbowRightPos.y &&
+            HGMSkelForm.HandLeftPos.y > HGMSkelForm.ElbowLeftPos.y)
             this.transform.Rotate(0, -(HGMSkelForm.HandRightPos.y - HGMSkelForm.HandLeftPos.y) * this.HandGlideRotateY * Time.deltaTime, 0);
-        /*  if (Input.GetKey("left") ) {
-              this.transform.Rotate(0, -15 * Time.deltaTime,0);
+         if (Input.GetKey("left") ) {
+              this.transform.Rotate(0, -45 * Time.deltaTime,0);
           }
           if (Input.GetKey("right"))
           {
-              this.transform.Rotate(0, 15 * Time.deltaTime, 0);
-          }*/
+              this.transform.Rotate(0, 45 * Time.deltaTime, 0);
+          }
     }
 }

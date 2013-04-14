@@ -4,7 +4,7 @@ using System.Collections;
 public class ScoreCount : MonoBehaviour {
     public StageData stageData;
     public int NormalCT,HardCT;
-
+    public AudioSource BugCrash_Audio, EatMagicBall_Audio;
     public bool Upload;
     GameObject[] objs;
 	// Use this for initialization
@@ -13,13 +13,15 @@ public class ScoreCount : MonoBehaviour {
 	}
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "RedBall(Clone)") {
+            EatMagicBall_Audio.Play();
             stageData.CorrectTimes++;
             stageData.PositiveScore += 5;
             Destroy(other.gameObject);
    
         }
-        if (other.gameObject.name == "BlackBall(Clone)")
+        if (other.gameObject.name == "LightningBug(Clone)")
         {
+            BugCrash_Audio.Play();
             stageData.WrongTimes++;
             stageData.NegativeScore -= 8;
             Destroy(other.gameObject);
