@@ -10,6 +10,7 @@ public class DetectPlayerPassObstacle_Stage2 : MonoBehaviour
         if (((1 << other.gameObject.layer) & this.PlayerLayer.value) > 0)
         {
             CalculateScore_Stage2.PassObstacleCount++;
+            Destroy(this.transform.parent.gameObject);
         }
     }
     // Use this for initialization
