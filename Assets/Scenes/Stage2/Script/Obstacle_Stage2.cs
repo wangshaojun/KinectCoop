@@ -23,14 +23,13 @@ public class Obstacle_Stage2 : MonoBehaviour
     private float addValue;
     private Vector3 originPosition;
 
-    public CalculateScore_Stage2 CalculateScore_Script;
     public LayerMask PlayerLayer;        //ª±®aªºLayer
 
     void OnTriggerEnter(Collider other)
     {
         if (((1 << other.gameObject.layer) & this.PlayerLayer.value) > 0)
         {
-            this.CalculateScore_Script.TouchObstacleCount++;
+            CalculateScore_Stage2.TouchObstacleCount++;
             other.transform.position -= new Vector3(0, 0, 3);
         }
     }
@@ -40,8 +39,6 @@ public class Obstacle_Stage2 : MonoBehaviour
     {
         this.originPosition = this.transform.position;
         this.addValue = Random.value * this.MoveDistance;
-        if (this.CalculateScore_Script == null)
-            this.CalculateScore_Script = GameObject.Find("CalculateScore").GetComponent<CalculateScore_Stage2>();
     }
 
     // Update is called once per frame
