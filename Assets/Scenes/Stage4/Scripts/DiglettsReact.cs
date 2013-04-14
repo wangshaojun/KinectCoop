@@ -39,17 +39,7 @@ public class DiglettsReact : MonoBehaviour
         this.renderer.material.mainTexture = this.ChangeTextures[this.currentTextureIndex];
     }
 
-    /// <summary>
-    /// 改變是否運行Regular Change Picture的狀態
-    /// </summary>
-    /// <param name="isChange">是或否</param>
-    public void ChangeState(bool isChange)
-    {
-        if (isChange)
-            this.Reset();
-        else
-            this.isChanging = false;
-    }
+
 
     // Update is called once per frame
     void Update()
