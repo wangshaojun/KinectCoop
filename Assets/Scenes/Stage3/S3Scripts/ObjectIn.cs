@@ -18,7 +18,7 @@ public class ObjectIn : MonoBehaviour
     void RedBallCreat()
     {
 
-        Instantiate(RedBall, this.transform.position + this.transform.TransformDirection(Random.Range(-9, 10), Random.Range(-1, 2), 0),
+        Instantiate(RedBall, this.transform.position + this.transform.TransformDirection(Random.Range(-9, 10), Random.Range(-5, 1), 0),
                     RedBall.transform.rotation);
 
     }
@@ -28,7 +28,7 @@ public class ObjectIn : MonoBehaviour
 
         int rodom = Random.Range(-9, 10);
 
-        GameObject obj = (GameObject)Instantiate(BlackBall, this.transform.position + this.transform.TransformDirection(rodom, Random.Range(-1, 2), 0),
+        GameObject obj = (GameObject)Instantiate(BlackBall, this.transform.position + this.transform.TransformDirection(rodom, Random.Range(-2, 0), 0),
           this.transform.rotation);
 
         if (rodom >= 0)
