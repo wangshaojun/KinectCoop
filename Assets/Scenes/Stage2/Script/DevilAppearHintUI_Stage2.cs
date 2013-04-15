@@ -14,6 +14,7 @@ public class DevilAppearHintUI_Stage2 : MonoBehaviour
     public GUIStyle style;
 
     private Vector2 screenOffset;
+    private Vector2 screenSize;             //視窗大小
 
     // Use this for initialization
     void Start()
@@ -23,7 +24,7 @@ public class DevilAppearHintUI_Stage2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //this.style.normal.textColor = this.HintColor;
+        this.screenSize = new Vector2((float)Screen.width / 1024.0f, (float)Screen.height / 768.0f);     //抓當前螢幕大小
     }
 
     void OnGUI()
@@ -34,7 +35,7 @@ public class DevilAppearHintUI_Stage2 : MonoBehaviour
         float distance = this.transform.position.z - this.Player.transform.position.z;
         if (distance < this.HintDistance && distance > -1)
             GUI.Box(new Rect(
-                Screen.width * TipRect.x, Screen.height * TipRect.y, Screen.width * TipRect.width, Screen.height * TipRect.height),
+                Screen.width * TipRect.x, Screen.height * TipRect.y, this.screenSize.x * this.HintTexture.width * TipRect.width, this.screenSize.y * this.HintTexture.height * TipRect.height),
                 this.HintTexture,
                 this.style);
     }
