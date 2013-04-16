@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 
 public class DataCollection : MonoBehaviour
 {
     // * DataCollection 資訊整合檔
-    
+    public string defaultPlayerName;
     public string PlayerName;           //玩家名稱
     public int PlayerTotalScore;        //玩家總分
     public string StartTime;            //系統開始時間
@@ -59,23 +60,27 @@ public class DataCollection : MonoBehaviour
             this.TakeTime = TakeTime;
             this.CorrectTimes2 = CorrectTimes2;
             this.WrongTimes2 = WrongTimes2;
-        }   
-         
+        }
+
     }
-    public ArrayList StageDataList;
+    public List<StageData> StageDataList;
 
 
 
-	// Use this for initialization
-	void Start () {
-        StageDataList = new ArrayList();
+    // Use this for initialization
+    void Start()
+    {
+        if (PlayerName == "")
+            PlayerName = defaultPlayerName;
+        StageDataList = new List<StageData>();
         DontDestroyOnLoad(this.gameObject); //此Object不會因為換場景而被刪除
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
-	}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     /// <summary>
     /// 輸出Log檔成txt
@@ -111,7 +116,7 @@ public class DataCollection : MonoBehaviour
             sw.Write("開始時間：" + StartTime + "\r\n");
             PlayerTotalScore = 0;
             for (int i = 0; i < StageDataList.Count; i++)
-                PlayerTotalScore += ((StageData)StageDataList[i]).PositiveScore - ((StageData)StageDataList[i]).NegativeScore;
+                PlayerTotalScore += (StageDataList[i]).PositiveScore - (StageDataList[i]).NegativeScore;
 
 
             sw.Write("玩家總分：" + PlayerTotalScore + "\r\n");
@@ -121,7 +126,7 @@ public class DataCollection : MonoBehaviour
         {
             for (int i = 0; i < StageDataList.Count; i++)
             {
-                if (((StageData)StageDataList[i]).stageName.ToString() != "平衡木")
+                if ((StageDataList[i]).stageName.ToString() != "平衡木")
                 {
                     sw.Write("---------------------------------------" + "\r\n");
                     string StatgeData = string.Format("關卡類別：{0} " + "\r\n" +
@@ -131,13 +136,13 @@ public class DataCollection : MonoBehaviour
                                                       "得分分數：{4} " + "\r\n" +
                                                       "扣分分數：{5} " + "\r\n" +
                                                       "花費時間：{6} " + "\r\n",
-                                                    ((StageData)StageDataList[i]).stageType.ToString(),
-                                                    ((StageData)StageDataList[i]).stageName.ToString(),
-                                                    ((StageData)StageDataList[i]).CorrectTimes.ToString(),
-                                                    ((StageData)StageDataList[i]).WrongTimes.ToString(),
-                                                    ((StageData)StageDataList[i]).PositiveScore.ToString(),
-                                                    ((StageData)StageDataList[i]).NegativeScore.ToString(),
-                                                    ((StageData)StageDataList[i]).TakeTime.ToString()
+                                                    (StageDataList[i]).stageType.ToString(),
+                                                    (StageDataList[i]).stageName.ToString(),
+                                                    (StageDataList[i]).CorrectTimes.ToString(),
+                                                    (StageDataList[i]).WrongTimes.ToString(),
+                                                    (StageDataList[i]).PositiveScore.ToString(),
+                                                    (StageDataList[i]).NegativeScore.ToString(),
+                                                    (StageDataList[i]).TakeTime.ToString()
                         );
                     sw.Write(StatgeData);
                 }
@@ -154,23 +159,23 @@ public class DataCollection : MonoBehaviour
                                                       "得分分數：{6} " + "\r\n" +
                                                       "扣分分數：{7} " + "\r\n" +
                                                       "花費時間：{8} " + "\r\n",
-                                                    ((StageData)StageDataList[i]).stageType.ToString(),
-                                                    ((StageData)StageDataList[i]).stageName.ToString(),
-                                                    ((StageData)StageDataList[i]).CorrectTimes.ToString(),
-                                                    ((StageData)StageDataList[i]).WrongTimes.ToString(),
-                                                    ((StageData)StageDataList[i]).CorrectTimes2.ToString(),
-                                                    ((StageData)StageDataList[i]).WrongTimes2.ToString(),
-                                                    ((StageData)StageDataList[i]).PositiveScore.ToString(),
-                                                    ((StageData)StageDataList[i]).NegativeScore.ToString(),
-                                                    ((StageData)StageDataList[i]).TakeTime.ToString()
+                                                    (StageDataList[i]).stageType.ToString(),
+                                                    (StageDataList[i]).stageName.ToString(),
+                                                    (StageDataList[i]).CorrectTimes.ToString(),
+                                                    (StageDataList[i]).WrongTimes.ToString(),
+                                                    (StageDataList[i]).CorrectTimes2.ToString(),
+                                                    (StageDataList[i]).WrongTimes2.ToString(),
+                                                    (StageDataList[i]).PositiveScore.ToString(),
+                                                    (StageDataList[i]).NegativeScore.ToString(),
+                                                    (StageDataList[i]).TakeTime.ToString()
                         );
                     sw.Write(StatgeData);
 
                 }
             }
-            
+
         }
-#endregion
+        #endregion
 
         sw.Close();
     }
