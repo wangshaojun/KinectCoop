@@ -7,6 +7,7 @@ public class Stage2Data : MonoBehaviour {
     public DataCollection dataCollection;
     public DataCollection.StageName stageName;
     public DataCollection.StageType stageType;
+    public DataCollection.PassOrNot passOrNot;
 
     public int CorrectTimes1;    //正確次數(障礙物)
     public int CorrectTimes2;    //正確次數(火蠅)
@@ -39,7 +40,7 @@ public class Stage2Data : MonoBehaviour {
     /// </summary>
     public void UploadData()
     {
-        DataCollection.StageData newStageData = new DataCollection.StageData(stageType, stageName, CorrectTimes1, WrongTimes1, PositiveScore, NegativeScore, TakeTime, CorrectTimes2, WrongTimes2);
+        DataCollection.StageData newStageData = new DataCollection.StageData(stageType, stageName, passOrNot, CorrectTimes1, WrongTimes1, PositiveScore, NegativeScore, TakeTime, CorrectTimes2, WrongTimes2);
         dataCollection.StageDataList.Add(newStageData); // 加到List
         dataCollection.OutputLog2txt(); //輸出檔案
     }

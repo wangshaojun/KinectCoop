@@ -13,12 +13,14 @@ public class DataCollection : MonoBehaviour
     public string StartTime;            //系統開始時間
 
     public enum StageType { Undefined, Normal, Hard, Boss }; //關卡難度類別
-    public enum StageName { 未定義, 魔法球分類, 平衡木, 滑翔翼, 閃避地雷, 最終大魔王 }; //關卡名稱
+    public enum StageName { 未定義, 魔法球分類, 平衡木, 滑翔翼, 閃避地雷}; //關卡名稱
+    public enum PassOrNot { Undefined, Pass, Fail }; //關卡通過狀態
 
     public struct StageData
     {
         public StageType stageType; //關卡類別
         public StageName stageName; //關卡名稱
+        public PassOrNot passOrNot; //關卡通過狀態
         public int CorrectTimes;    //正確次數
         public int WrongTimes;      //錯誤次數
         public int PositiveScore;   //得分分數
@@ -42,6 +44,7 @@ public class DataCollection : MonoBehaviour
         public StageData(
             StageType stageType = StageType.Undefined,
             StageName stageName = StageName.未定義,
+            PassOrNot passOrNot = PassOrNot.Undefined,
             int CorrectTimes = 0,
             int WrongTimes = 0,
             int PositiveScore = 0,
@@ -53,6 +56,7 @@ public class DataCollection : MonoBehaviour
         {
             this.stageType = stageType;
             this.stageName = stageName;
+            this.passOrNot = passOrNot;
             this.CorrectTimes = CorrectTimes;
             this.WrongTimes = WrongTimes;
             this.PositiveScore = PositiveScore;
@@ -131,13 +135,15 @@ public class DataCollection : MonoBehaviour
                     sw.Write("---------------------------------------" + "\r\n");
                     string StatgeData = string.Format("關卡類別：{0} " + "\r\n" +
                                                       "關卡名稱：{1} " + "\r\n" +
-                                                      "正確次數：{2} " + "\r\n" +
-                                                      "錯誤次數：{3} " + "\r\n" +
-                                                      "得分分數：{4} " + "\r\n" +
-                                                      "扣分分數：{5} " + "\r\n" +
-                                                      "花費時間：{6} " + "\r\n",
+                                                      "是否通過：{2} " + "\r\n" +
+                                                      "正確次數：{3} " + "\r\n" +
+                                                      "錯誤次數：{4} " + "\r\n" +
+                                                      "得分分數：{5} " + "\r\n" +
+                                                      "扣分分數：{6} " + "\r\n" +
+                                                      "花費時間：{7} " + "\r\n",
                                                     (StageDataList[i]).stageType.ToString(),
                                                     (StageDataList[i]).stageName.ToString(),
+                                                    (StageDataList[i]).passOrNot.ToString(),
                                                     (StageDataList[i]).CorrectTimes.ToString(),
                                                     (StageDataList[i]).WrongTimes.ToString(),
                                                     (StageDataList[i]).PositiveScore.ToString(),
@@ -152,15 +158,17 @@ public class DataCollection : MonoBehaviour
                     sw.Write("---------------------------------------" + "\r\n");
                     string StatgeData = string.Format("關卡類別：{0} " + "\r\n" +
                                                       "關卡名稱：{1} " + "\r\n" +
-                                                      "正確次數(障礙物)：{2} " + "\r\n" +
-                                                      "錯誤次數(障礙物)：{3} " + "\r\n" +
-                                                      "正確次數(火蠅)：{4} " + "\r\n" +
-                                                      "錯誤次數(火蠅)：{5} " + "\r\n" +
-                                                      "得分分數：{6} " + "\r\n" +
-                                                      "扣分分數：{7} " + "\r\n" +
-                                                      "花費時間：{8} " + "\r\n",
+                                                      "是否通過：{2} " + "\r\n" +
+                                                      "正確次數(障礙物)：{3} " + "\r\n" +
+                                                      "錯誤次數(障礙物)：{4} " + "\r\n" +
+                                                      "正確次數(火蠅)：{5} " + "\r\n" +
+                                                      "錯誤次數(火蠅)：{6} " + "\r\n" +
+                                                      "得分分數：{7} " + "\r\n" +
+                                                      "扣分分數：{8} " + "\r\n" +
+                                                      "花費時間：{9} " + "\r\n",
                                                     (StageDataList[i]).stageType.ToString(),
                                                     (StageDataList[i]).stageName.ToString(),
+                                                    (StageDataList[i]).passOrNot.ToString(),
                                                     (StageDataList[i]).CorrectTimes.ToString(),
                                                     (StageDataList[i]).WrongTimes.ToString(),
                                                     (StageDataList[i]).CorrectTimes2.ToString(),
