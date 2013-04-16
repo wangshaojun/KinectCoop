@@ -53,7 +53,22 @@
                 // Debug.WriteLine("GesturePart 1 - right hand below shoulder height but above hip height - FAIL");
                 return GesturePartResult.Fail;
             }
-
+            else
+            {
+                if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].z > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowLeft].z)
+                {
+                    if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.Head].y &&
+                        skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
+                    {
+                        if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].x > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ShoulderLeft].x) //&&
+                        {
+                            return GesturePartResult.Suceed;
+                        }
+                        return GesturePartResult.Pausing;
+                    }
+                    return GesturePartResult.Fail;
+                }
+            }
             // Debug.WriteLine("GesturePart 1 - Right hand in front of right shoulder - FAIL");
             return GesturePartResult.Fail;
         }

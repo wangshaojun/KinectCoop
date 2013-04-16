@@ -29,7 +29,7 @@
         {
             // //Right hand in front of right shoulder [ 注意 Z 軸 ]
             if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].z > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowRight].z)
-               // skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
+            // skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
             {
                 // //right hand below right eblow height
                 if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowRight].y)
@@ -46,8 +46,21 @@
                 // Debug.WriteLine("GesturePart 0 - right hand below shoulder height but above hip height - FAIL");
                 return GesturePartResult.Fail;
             }
-
-            // Debug.WriteLine("GesturePart 0 - Right hand in front of right shoulder - FAIL");
+            else
+            {
+                if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].z > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowLeft].z)
+                {
+                    if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowLeft].y)
+                    {
+                        if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowLeft].y)
+                        {
+                            return GesturePartResult.Suceed;
+                        }
+                        return GesturePartResult.Pausing;
+                    }
+                    return GesturePartResult.Fail;
+                }
+            }
             return GesturePartResult.Fail;
 
             

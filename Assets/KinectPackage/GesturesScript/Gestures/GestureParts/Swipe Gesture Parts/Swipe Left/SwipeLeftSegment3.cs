@@ -30,7 +30,7 @@
         {
             // //Right hand in front of right Shoulder
             if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].z > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowRight].z)
-                //skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
+            //skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
             {
                 // Debug.WriteLine("GesturePart 2 - Right hand in front of right shoulder - PASS");
                 // //right hand below shoulder height but above hip height
@@ -52,7 +52,22 @@
                 // Debug.WriteLine("GesturePart 2 - right hand below shoulder height but above hip height - FAIL");
                 return GesturePartResult.Fail;
             }
-
+            else
+            {
+                if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].z > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowRight].z)
+                {
+                    if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.Head].y &&
+                        skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
+                    {
+                        if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].x < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ShoulderLeft].x)
+                        {
+                            return GesturePartResult.Suceed;
+                        }
+                        return GesturePartResult.Pausing;
+                    }
+                    return GesturePartResult.Fail;
+                }
+            }
             // Debug.WriteLine("GesturePart 2 - Right hand in front of right Shoulder - FAIL");
             return GesturePartResult.Fail;
         }

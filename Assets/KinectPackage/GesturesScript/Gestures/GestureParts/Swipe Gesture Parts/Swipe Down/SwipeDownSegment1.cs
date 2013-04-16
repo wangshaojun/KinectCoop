@@ -29,13 +29,13 @@
         {
             // //Right hand in front of right shoulder [ 注意 Z 軸 ]
             if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].z > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowRight].z)
-               // skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
+            // skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y < skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HipCenter].y)
             {
                 // //right hand above right eblow height
                 if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].y > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowRight].y)
                 {
                     // //right hand above spine height
-                    if(skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].y > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.Spine].y)
+                    if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight].y > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.Spine].y)
                     {
                         return GesturePartResult.Suceed;
                     }
@@ -45,6 +45,26 @@
 
                 // Debug.WriteLine("GesturePart 0 - right hand below shoulder height but above hip height - FAIL");
                 return GesturePartResult.Fail;
+            }
+            else
+            {
+                if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].z > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowLeft].z)
+                {
+                    // //left hand above left eblow height
+                    if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowLeft].y)
+                    {
+                        // //left hand above spine height
+                        if (skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft].y > skeletonWrapper.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.Spine].y)
+                        {
+                            return GesturePartResult.Suceed;
+                        }
+
+                        return GesturePartResult.Pausing;
+                    }
+
+                    // Debug.WriteLine("GesturePart 0 - right hand below shoulder height but above hip height - FAIL");
+                    return GesturePartResult.Fail;
+                }
             }
 
             // Debug.WriteLine("GesturePart 0 - Right hand in front of right shoulder - FAIL");
