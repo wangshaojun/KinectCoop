@@ -20,6 +20,8 @@ public class Digletts: MonoBehaviour {
     public int NormalNegativeScore = 1; //基礎關卡負分
     public int HardPositiveScore = 2; //進階關卡正分
     public int HardNegativeScore = 2; //進階關卡負分
+    public int BossPositiveScore = 2; //進階關卡正分
+    public int BossNegativeScore = 2; //進階關卡負分
 
 
     #region PRIVATES
@@ -36,15 +38,14 @@ public class Digletts: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (stageData.stageType == DataCollection.StageType.Hard)
+        if (stageData.stageType == DataCollection.StageType.Hard ||
+            stageData.stageType == DataCollection.StageType.Boss)
         {
             Interval = HardInterval;
             Stay = HardStay;
         }
 
         int newValue = RandomValue(oldValue);
-        
-
         if (newValue >= 0)
         {
             oldValue = newValue;
@@ -66,10 +67,9 @@ public class Digletts: MonoBehaviour {
             {
                 newValue = Random.Range(0, 8);
             }
-            while (oldValue == newValue);
+            while (oldValue == newValue); //使數字不重複
             return  newValue;
         }
         return -1;
-        
     }
 }
