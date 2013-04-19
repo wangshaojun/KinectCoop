@@ -1,24 +1,33 @@
 using UnityEngine;
 using System.Collections;
 
-public class CubeTrigger : MonoBehaviour {
 
+public class CubeTrigger : MonoBehaviour {
+    
     bool OnTriggerEnter(Collider col)
     {
+        
         Debug.Log(col.name);
+        Debug.Log(this.name);
         if (col.tag == "Stage1Ball")
         {
-            //判斷撞到的球是否符合方向，這個要放在上面的return之前-->顯示正確失敗結果
-		//判斷移動方向
+            //判斷撞到的球是否符合方向-->顯示正確失敗結果
             //LevelController.isBingo = true;
-            if (col.name == "Ball1_Prefab") ;   //紅
-            if (col.name == "Ball2_Prefab") ;   //綠
-            if (col.name == "Ball3_Prefab") ;   //黃
-            if (col.name == "Ball4_Prefab") ;   //藍
-            if (col.name == "Ball5_Prefab") ;   //紫
-            if (col.name == "Ball6_Prefab") ;   //黑
+            if (col.name == "Ball1_Prefab" && this.name == "CollisionCube_u") LevelController_1.isBingo = true;   //紅
+            else LevelController_1.isFailed = true;
+            if (col.name == "Ball2_Prefab" && this.name == "CollisionCube_l") LevelController_1.isBingo = true;   //綠
+            else LevelController_1.isFailed = true;
+            if (col.name == "Ball3_Prefab" && this.name == "CollisionCube_d") LevelController_1.isBingo = true;   //黃
+            else LevelController_1.isFailed = true;
+            if (col.name == "Ball4_Prefab" && this.name == "CollisionCube_r") LevelController_1.isBingo = true;   //藍
+            else LevelController_1.isFailed = true;
+            if (col.name == "Ball5_Prefab") LevelController_1.isFailed = true;   //紫
+            else LevelController_1.isFailed = true;
+            if (col.name == "Ball6_Prefab") LevelController_1.isFailed = true;   //黑
+            else LevelController_1.isFailed = true;
             return FruitCreator.isBallKilled = true;
         }
+        FruitCreator.isMoving = false;
         return false;
     }
 

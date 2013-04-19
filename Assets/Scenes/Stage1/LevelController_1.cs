@@ -4,6 +4,7 @@ using System.Collections;
 public class LevelController_1 : MonoBehaviour
 {
     public static bool isBingo = false, isFailed = false;   //是否達成正確判斷的任務
+    public AudioSource audioCorrect, audioWrong;    //好像不是audioSource
     public Transform correctPlane;
     public static int kindNum = 3;
     //此關卡揮手動作判斷為:往右需"左手往右揮"、往左需"右手往左揮"，其他動作尚未設定
@@ -54,7 +55,7 @@ public class LevelController_1 : MonoBehaviour
         }
 
         Act();
-
+            
         if (isBingo)    //成功分類
         {
             //紀錄成績
@@ -62,14 +63,16 @@ public class LevelController_1 : MonoBehaviour
             //成功反應
             Instantiate(correctPlane);
             Destroy(GameObject.Find("CorrectPlane(Clone)"),1.5f);
+            audioCorrect.Play();
             //呼叫置換水果的函式，還沒寫
             Debug.Log("bingo!");
-            FruitCreator.isMoving = true;
+            //FruitCreator.isMoving = true;
             isBingo = false;
         }
         if (isFailed)   //中途任務失敗重新進行關卡
         {
             AddWrongTimes = true;
+            audioWrong.Play();
             //這裡要寫:重置關卡(還有進階版:連續失敗三次回到簡易版)
             //先不寫
             isFailed = false;
@@ -111,8 +114,8 @@ public class LevelController_1 : MonoBehaviour
         {
             FruitCreator.isMoving = true;
             FruitCreator.idir = 2;
-            if (FruitCreator.ikind == 2) isBingo = true;
-            else isFailed = true;
+            //if (FruitCreator.ikind == 2) isBingo = true;
+            //else isFailed = true;
             Gesture.isSwipeDown = false;
         }
 
@@ -120,8 +123,8 @@ public class LevelController_1 : MonoBehaviour
         {
             FruitCreator.isMoving = true;
             FruitCreator.idir = 0;
-            if (FruitCreator.ikind == 0) isBingo = true;
-            else isFailed = true;
+            //if (FruitCreator.ikind == 0) isBingo = true;
+            //else isFailed = true;
             Gesture.isSwipeLeft = false;
         }
 
@@ -129,8 +132,8 @@ public class LevelController_1 : MonoBehaviour
         {
             FruitCreator.isMoving = true;
             FruitCreator.idir = 1; 
-            if (FruitCreator.ikind == 1) isBingo = true;
-            else isFailed = true;
+            //if (FruitCreator.ikind == 1) isBingo = true;
+            //else isFailed = true;
             Gesture.isSwipeUp = false;
         }
 
@@ -138,8 +141,8 @@ public class LevelController_1 : MonoBehaviour
         {
             FruitCreator.isMoving = true;
             FruitCreator.idir = 3; 
-            if (FruitCreator.ikind == 3) isBingo = true;
-            else isFailed = true;
+            //if (FruitCreator.ikind == 3) isBingo = true;
+            //else isFailed = true;
             Gesture.isSwipeRight = false;
         }
     }
