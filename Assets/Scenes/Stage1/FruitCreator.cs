@@ -4,6 +4,7 @@ using System.Collections;
 public class FruitCreator : MonoBehaviour
 {
     public static int ikind = 0;
+    public static int[] ikind2 = { 0, 0, 0 };
     public static int idir;
     public static bool isMoving = false, isShowHint = true, saveTempTime = false, isBallKilled = false;
     public static bool isOver3sec = false; //三秒限制超過
@@ -17,6 +18,9 @@ public class FruitCreator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        ikind2[0] = Random.Range(0, LevelController_1.kindNum);
+        ikind2[1] = Random.Range(0, LevelController_1.kindNum);
+        ikind2[2] = Random.Range(0, LevelController_1.kindNum);
         AddFruit();
         origin_pos = fruits[ikind].position;
     }
@@ -160,9 +164,22 @@ public class FruitCreator : MonoBehaviour
     {
         fruits[ikind].position = origin_pos; //還原位置
         saveTempTime = true;
-        ikind = Random.Range(0, LevelController_1.kindNum);
-        //ikind = 0;  //test
+        //ikind = Random.Range(0, LevelController_1.kindNum);
+        ikind = ikind2[0];
+        ikind2[0] = ikind2[1];
+        ikind2[1] = ikind2[2];
+        ikind2[2] = Random.Range(0, LevelController_1.kindNum);
+        Debug.Log(ikind2[0]); Debug.Log(ikind2[1]); Debug.Log(ikind2[2]);
+
+       //ikind = 0;  //test
         magicball = Instantiate(fruits[ikind]) as GameObject;
+        Destroy(GameObject.Find("magic ball green(Clone)"));
+        Destroy(GameObject.Find("magic ball yellow(Clone)"));
+        Destroy(GameObject.Find("magic ball red(Clone)"));
+        
+        Instantiate(fruits[ikind2[0]], new Vector3(85, 0, 30), new Quaternion(0, 0, 0, 0));
+        Instantiate(fruits[ikind2[1]], new Vector3(100, 0, 30), new Quaternion(0, 0, 0, 0));
+        Instantiate(fruits[ikind2[2]], new Vector3(115, 0, 30), new Quaternion(0, 0, 0, 0));
         if (isShowHint)
         {
             switch (ikind)

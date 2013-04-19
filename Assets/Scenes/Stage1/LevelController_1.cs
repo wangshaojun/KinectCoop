@@ -4,7 +4,8 @@ using System.Collections;
 public class LevelController_1 : MonoBehaviour
 {
     public static bool isBingo = false, isFailed = false;   //是否達成正確判斷的任務
-    public AudioSource audioCorrect, audioWrong;    //好像不是audioSource
+    public AudioClip acCorrect, acWrong;
+    AudioSource audioCorrect, audioWrong;
     public Transform correctPlane;
     public static int kindNum = 3;
     //此關卡揮手動作判斷為:往右需"左手往右揮"、往左需"右手往左揮"，其他動作尚未設定
@@ -22,7 +23,10 @@ public class LevelController_1 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        //acCorrect = AudioClip.Create("1_magic sort success sound", 14400, 1, 14400, false, true);
+        audioCorrect.clip = acCorrect;
+        audioWrong.clip = acWrong;
+        Debug.Log("get audio clip");
     }
 
     // Update is called once per frame
@@ -49,21 +53,21 @@ public class LevelController_1 : MonoBehaviour
                 if (tempTimer - stageData.TakeTime < -3) //等三秒限制，失敗的反應還沒寫
                 {
                     FruitCreator.isOver3sec = true;
-                    AddWrongTimes = true;
+                    if(FruitCreator.ikind < 4)AddWrongTimes = true;
                 }
             }  
         }
 
-        Act();
+        if(FruitCreator.isMoving == false) Act();
             
         if (isBingo)    //成功分類
         {
             //紀錄成績
             AddCorrectTimes = true;
             //成功反應
-            Instantiate(correctPlane);
-            Destroy(GameObject.Find("CorrectPlane(Clone)"),1.5f);
-            audioCorrect.Play();
+            //Instantiate(correctPlane);
+            //Destroy(GameObject.Find("CorrectPlane(Clone)"),1.5f);
+            //audioCorrect.Play();
             //呼叫置換水果的函式，還沒寫
             Debug.Log("bingo!");
             //FruitCreator.isMoving = true;
@@ -72,7 +76,7 @@ public class LevelController_1 : MonoBehaviour
         if (isFailed)   //中途任務失敗重新進行關卡
         {
             AddWrongTimes = true;
-            audioWrong.Play();
+            //audioWrong.Play();
             //這裡要寫:重置關卡(還有進階版:連續失敗三次回到簡易版)
             //先不寫
             isFailed = false;
