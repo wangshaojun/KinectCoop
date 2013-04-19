@@ -109,6 +109,8 @@ public class LevelController_1 : MonoBehaviour
         //判斷手揮動方向是否和顏色方位吻合
         if (Input.GetKeyUp(KeyCode.S) || (Gesture.isSwipeDown))
         {
+            FruitCreator.isMoving = true;
+            FruitCreator.idir = 2;
             if (FruitCreator.ikind == 2) isBingo = true;
             else isFailed = true;
             Gesture.isSwipeDown = false;
@@ -116,6 +118,8 @@ public class LevelController_1 : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.A) || (Gesture.isSwipeLeft))
         {
+            FruitCreator.isMoving = true;
+            FruitCreator.idir = 0;
             if (FruitCreator.ikind == 0) isBingo = true;
             else isFailed = true;
             Gesture.isSwipeLeft = false;
@@ -123,6 +127,8 @@ public class LevelController_1 : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W) || (Gesture.isSwipeUp))
         {
+            FruitCreator.isMoving = true;
+            FruitCreator.idir = 1; 
             if (FruitCreator.ikind == 1) isBingo = true;
             else isFailed = true;
             Gesture.isSwipeUp = false;
@@ -130,6 +136,8 @@ public class LevelController_1 : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.D) || (Gesture.isSwipeRight))
         {
+            FruitCreator.isMoving = true;
+            FruitCreator.idir = 3; 
             if (FruitCreator.ikind == 3) isBingo = true;
             else isFailed = true;
             Gesture.isSwipeRight = false;

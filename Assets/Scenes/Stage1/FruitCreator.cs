@@ -4,6 +4,7 @@ using System.Collections;
 public class FruitCreator : MonoBehaviour
 {
     public static int ikind = 0;
+    public static int idir;
     public static bool isMoving = false, isShowHint = true, saveTempTime = false, isBallKilled = false;
     public static bool isOver3sec = false; //¤T¬í­­¨î¶W¹L
     public static Transform f1, f2, f3, f4, f5, f6;
@@ -42,19 +43,117 @@ public class FruitCreator : MonoBehaviour
     {
         switch (ikind)
         {
-            case 0: //left
-                GameObject.Find("magic ball green(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+            case 0: //green
+                switch (idir) {
+                    case 0://left
+                        GameObject.Find("magic ball green(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                        break;
+                    case 1://up
+                        GameObject.Find("magic ball green(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                        break;
+                    case 2://down
+                        GameObject.Find("magic ball green(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                        break;
+                    case 3://right
+                        GameObject.Find("magic ball green(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                        break;
+                }
+                
                 break;
-            case 1: //up
-                GameObject.Find("magic ball red(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+            case 1: //red
+                switch (idir)
+                {
+                    case 0://left
+                        GameObject.Find("magic ball red(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                        break;
+                    case 1://up
+                        GameObject.Find("magic ball red(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                        break;
+                    case 2://down
+                        GameObject.Find("magic ball red(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                        break;
+                    case 3://right
+                        GameObject.Find("magic ball red(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                        break;
+                }
+                //GameObject.Find("magic ball red(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
                 break;
-            case 2: //down
-                GameObject.Find("magic ball yellow(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+            case 2: //yellow
+                switch (idir)
+                {
+                    case 0://left
+                        GameObject.Find("magic ball yellow(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                        break;
+                    case 1://up
+                        GameObject.Find("magic ball yellow(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                        break;
+                    case 2://down
+                        GameObject.Find("magic ball yellow(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                        break;
+                    case 3://right
+                        GameObject.Find("magic ball yellow(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                        break;
+                }
+                //GameObject.Find("magic ball yellow(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
                 break;
-            case 3: //right
-                GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+            case 3: //blue
+                switch (idir)
+                {
+                    case 0://left
+                        GameObject.Find("magic ball blue(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                        break;
+                    case 1://up
+                        GameObject.Find("magic ball blue(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                        break;
+                    case 2://down
+                        GameObject.Find("magic ball blue(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                        break;
+                    case 3://right
+                        GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                        break;
+                }
+                //GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                break;
+            
+            case 4: //purple
+                switch (idir)
+                {
+                    case 0://left
+                        GameObject.Find("magic ball purple(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                        break;
+                    case 1://up
+                        GameObject.Find("magic ball purple(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                        break;
+                    case 2://down
+                        GameObject.Find("magic ball purple(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                        break;
+                    case 3://right
+                        GameObject.Find("magic ball purple(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                        break;
+                }
+                //GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                break;
+            case 5: //black
+                switch (idir)
+                {
+                    case 0://left
+                        GameObject.Find("magic ball black(Clone)").transform.Translate(-15 * Time.deltaTime, 0, 0);
+                        break;
+                    case 1://up
+                        GameObject.Find("magic ball black(Clone)").transform.Translate(0, 15 * Time.deltaTime, 0);
+                        break;
+                    case 2://down
+                        GameObject.Find("magic ball black(Clone)").transform.Translate(0, -15 * Time.deltaTime, 0);
+                        break;
+                    case 3://right
+                        GameObject.Find("magic ball black(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
+                        break;
+                }
+                //GameObject.Find("magic ball blue(Clone)").transform.Translate(15 * Time.deltaTime, 0, 0);
                 break;
         }
+
+
     }
 
     void AddFruit()
