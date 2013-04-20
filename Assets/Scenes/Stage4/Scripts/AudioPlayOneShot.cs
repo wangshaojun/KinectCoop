@@ -3,31 +3,33 @@ using System.Collections;
 
 public class AudioPlayOneShot : MonoBehaviour {
 
-    public AudioClip Audio;
-    private bool isPlayed = false;
+    public AudioClip[] Audio;
+    public int audioCount;
+    public bool playOneShot;
     
 	// Use this for initialization
 	void Start () {
-        
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (isPlayed)
+      
+        if (playOneShot)
         {
-            if (this.audio.isPlaying == false)
-                ;// Destroy(this);
+            playOneShot = false;
+            if(Audio[audioCount] && !this.audio.isPlaying)
+            {
+                this.audio.Stop();
+                PlayAudio(audioCount);
+            }
         }
 	}
 
 
 
-    public void PlayAudio()
+    public void PlayAudio(int _audioCount)
     {
-        isPlayed = true;
-        if (!this.GetComponent<AudioSource>())
-            this.gameObject.AddComponent<AudioSource>();
-
-        this.audio.PlayOneShot(Audio);
+        this.audio.PlayOneShot(Audio[_audioCount]);
     }
 }

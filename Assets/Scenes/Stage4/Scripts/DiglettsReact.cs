@@ -26,27 +26,12 @@ public class DiglettsReact : MonoBehaviour
 
 
 
-
     // Use this for initialization
     void Start()
     {
         this.Reset();
         //亂數設定此物件為地鼠或地雷
-        
-        int type = Random.Range(0, 2);
-        if (type == 0)
-        {
-            objectType = ObjectType.Diglett;
-            ChangeTextures = ChangeTextures_Diglett;
-        }
 
-        if (type == 1)
-        {
-            ChangeTextures = ChangeTextures_Bomb;
-            objectType = ObjectType.Bomb;
-        }
-        
-        
         diglettsNum = int.Parse(this.name.ToCharArray()[9].ToString()); //抓第九字元...不想用public
     }
 
@@ -68,10 +53,21 @@ public class DiglettsReact : MonoBehaviour
     {
         if (this.isLive)
         {
+            if (objectType == ObjectType.Diglett)
+            {
+                ChangeTextures = ChangeTextures_Diglett;
+            }
+
+            if (objectType == ObjectType.Bomb)
+            {
+                ChangeTextures = ChangeTextures_Bomb;
+            }
+
+
             if (this.addValue >= this.ChangeTextureTime)
             {
                 this.addValue = 0;
-                if(this.currentTextureIndex+1 < this.ChangeTextures.Length)
+                if (this.currentTextureIndex + 1 < this.ChangeTextures.Length)
                     this.currentTextureIndex++;
                 this.renderer.material.mainTexture = this.ChangeTextures[this.currentTextureIndex];
             }
@@ -108,14 +104,15 @@ public class DiglettsReact : MonoBehaviour
                 stageData.NegativeScore += digletts.HardNegativeScore;
              */
             this.isLive = false;
-             
+
         }
     }
 
 
     void isHit()
     {
-        audio.PlayOneShot(digletts.Die);
+        if(objectType == ObjectType.Bomb)
+            audio.PlayOneShot(digletts.Appear_bomb);
         this.Reset();
         this.isLive = false;
 

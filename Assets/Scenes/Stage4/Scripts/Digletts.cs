@@ -7,8 +7,8 @@ public class Digletts: MonoBehaviour {
     public float Stay;     //出現後的等待時間
 
     //AudioClips
-    public AudioClip Appear;
-    public AudioClip Die;
+    public AudioClip Appear_obake;
+    public AudioClip Appear_bomb;
     public StageData stageData;
 
 
@@ -23,6 +23,7 @@ public class Digletts: MonoBehaviour {
     public int BossPositiveScore = 2; //進階關卡正分
     public int BossNegativeScore = 2; //進階關卡負分
 
+    int type;
 
     #region PRIVATES
     private int oldValue;
@@ -31,8 +32,7 @@ public class Digletts: MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-        Interval = NormalInterval;
-        Stay = NormalStay;
+
 	}
 	
 	// Update is called once per frame
@@ -44,13 +44,32 @@ public class Digletts: MonoBehaviour {
             Interval = HardInterval;
             Stay = HardStay;
         }
+        else
+        {
+            Interval = NormalInterval;
+            Stay = NormalStay;
+        }
 
         int newValue = RandomValue(oldValue);
         if (newValue >= 0)
         {
             oldValue = newValue;
             transform.GetChild(newValue).SendMessage("AnimationActive");
-            transform.GetChild(newValue).audio.PlayOneShot(Appear);
+            transform.GetChild(newValue).audio.PlayOneShot(Appear_obake);
+
+            //亂數決定該Object為地鼠or地雷
+            if(stageData.stageType == DataCollection.StageType.Hard ||
+            stageData.stageType == DataCollection.StageType.Boss)
+            {
+            type = Random.Range(0, 2);
+            if (type == 0)
+                transform.GetChild(newValue).GetComponent<DiglettsReact>().objectType = DiglettsReact.ObjectType.Diglett;
+
+
+            if (type == 1)
+                transform.GetChild(newValue).GetComponent<DiglettsReact>().objectType = DiglettsReact.ObjectType.Bomb;
+            }
+           
         }
 	}
 
